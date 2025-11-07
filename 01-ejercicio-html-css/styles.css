@@ -63,6 +63,15 @@ h1 {
 .logo {
   text-decoration: none;
   color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+    color: var(--primary-light);
+  }
 }
 
 h1 + p {
@@ -79,7 +88,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: .5rem 2rem;
+  flex-wrap: wrap;
 
   h2 {
     font-size: 1.25rem;
@@ -348,8 +358,9 @@ article {
 .jobs-listings {
   border: 1px solid rgba(30, 151, 203, 0.3);
   border-radius: 1rem;
+  list-style: none;
 
-  article {
+  li article {
     background: none;
     box-shadow: none;
     border-radius: 0;
@@ -365,13 +376,17 @@ article {
       opacity: 0.75;
     }
 
+    h3 {
+      margin-block: 0;
+    }
+
     p {
       margin-top: 0.5rem;
     }
+  }
 
-    &:last-child {
-      border-bottom: none;
-    }
+  li:last-child article {
+   border-bottom: none;
   }
 }
 
@@ -438,6 +453,13 @@ select {
   background: #09f;
 }
 /*----------------------------------LISTA DE EMPLEOS----------------------------------------------*/
+
+.job-results-section {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 #linksTo {
   color: #1173da;
   text-decoration: none;
@@ -453,13 +475,13 @@ select {
   padding-left: 1.5rem;
 }
 
-li::before {
+/* li::before {
   content: url("./img/circle-check.svg");
   color: #09f;
   display: inline-block;
   margin-left: -1.5rem;
   vertical-align: middle;
-}
+} */
 
 .section {
   max-width: 1200px;
