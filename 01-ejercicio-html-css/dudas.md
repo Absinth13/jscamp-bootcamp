@@ -5,4 +5,4 @@ que me hiciste en mi codigo, unos comentarios los deje otros los quite. Los debo
 hice todas las correciones que me pediste he investige las cosas que me dejaste también.
 -tengo una duda, hice mi codigo en mi carpeta personal ahi tengo una capeta sólo para imágenes he iconos,
 en esta que esta ya hecha y que clone del repositior no hay una carpeta para eso, mi duda es, se puede dejar asi o se debe hacer una
-carpeta especifica?
+carpeta especifica? por que no me aparece mi imagen en el index al abrirlo en el navegador. ya cheque la ruta y el css y sigue sin aparecer
