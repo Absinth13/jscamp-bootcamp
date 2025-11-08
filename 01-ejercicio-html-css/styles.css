@@ -88,7 +88,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: .5rem 2rem;
+  gap: 0.5rem 2rem;
   flex-wrap: wrap;
 
   h2 {
@@ -360,7 +360,7 @@ article {
   border-radius: 1rem;
   list-style: none;
 
-  li article {
+  article {
     background: none;
     box-shadow: none;
     border-radius: 0;
@@ -383,10 +383,10 @@ article {
     p {
       margin-top: 0.5rem;
     }
-  }
 
-  li:last-child article {
-   border-bottom: none;
+    &:last-child {
+      border-bottom: none;
+    }
   }
 }
 
@@ -452,39 +452,66 @@ select {
 .button-apply-job {
   background: #09f;
 }
-/*----------------------------------LISTA DE EMPLEOS----------------------------------------------*/
 
-.job-results-section {
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
+li:last-child article {
+  border-bottom: none;
+  background: #09f;
 }
+/*----------------------------------LISTA DE EMPLEOS----------------------------------------------*/
 
 #linksTo {
   color: #1173da;
   text-decoration: none;
 }
 
+.empleoIng {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.empleoIng h3 {
+  text-align: left;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
 .lista ul {
-  color: #94a3b8;
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .lista li {
+  display: flex;
+  align-items: center;
   padding-left: 1.5rem;
+  color: #98a3b3;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
 }
 
-/* li::before {
-  content: url("./img/circle-check.svg");
-  color: #09f;
-  display: inline-block;
-  margin-left: -1.5rem;
-  vertical-align: middle;
-} */
-
-.section {
-  max-width: 1200px;
-  width: 100%;
+.checkmark {
+  display: inline-flex;
+  background: none;
+  margin-right: 0.625rem;
+  flex-shrink: 0;
 }
 
+.caja {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.btnApply {
+  max-width: 1280px;
+  margin: 2rem auto 1rem;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: flex-end;
+}

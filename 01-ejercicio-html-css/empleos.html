@@ -12,16 +12,23 @@
 
 <body>
   <header>
-    <!-- No puede haber un heading envolviendo un anchor, debería ser al revés -->
-    <a class="logo" href="./index.html">
-      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <polyline points="16 18 22 12 16 6"></polyline>
-        <polyline points="8 6 2 12 8 18"></polyline>
-      </svg>
-
-      <h1>DevJobs</h1>
-    </a>
+ <h1>
+        <a class="logo" href="./index.html">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          DevJobs
+        </a>
+      </h1>
 
     <nav>
       <a href="./index.html" target="_self" rel="noopener noreferrer">Inicio</a>
@@ -56,7 +63,10 @@
             En este caso, el input no necesita el atributo required.
             Si queremos filtrar por uno de los select, el input nos pedirá que ingresemos algo, lo cual, no tiene que ser obligatorio.
             -->
-          <input id="empleos-search-input" type="text" placeholder="Buscar trabajos, empresas o habilidades" />
+          <input id="empleos-search-input"
+              type="text"
+              placeholder="Buscar trabajos, empresas o habilidades"
+            />
         </div>
 
         <div class="search-filters">
@@ -100,49 +110,44 @@
       <h2>Resultados de búsqueda</h2>
 
       <!-- Se puede entender que hay una lista de resultados de empleos. -->
-      <ul class="jobs-listings">
-        <li>
-          <article data-modalidad="remoto" class="job-listing-card">
-            <div>
-              <!-- No hay un h4 previo a este heading, por lo que lo correcto es que sea un h3 -->
-              <h3>Ingeniero de Software</h3>
-                <small>Tech Solutions Inc. | Remoto</small>
-                <p>
-                  Buscamos un ingeniero de Software con experiencia en desarrollo web
-                  y conocimientos de Javascript, React y Node.js. El idea deber ser
-                  capaz de trabajar en equipo y tener buenas habilidades de
-                  comunicación.
-                </p>
-            </div>
-            <button class="button-apply-job">Aplicar</button>
-          </article>
-        </li>
-        <li>
-          <article class="job-listing-card">
-            <div>
-              <h3>Desarrollador de Aplicaciones Móviles</h3>
-              <small>Mobile Apps Ltd. | Guadalajara</small>
-              <p>Buscamos un desarrollador de aplicaciones móviles con experiencia en iOS y/o Android. El candidato debe
-                tener conocimientos en Swift, Kotlin y el desarrollo de interfaces de usuario.</p>
-            </div>
-            <button class="button-apply-job">Aplicar</button>
-          </article>
-        </li>
+     
+         <div class="jobs-listings">
+        <article class="job-listing-card">
+        <div>
+          <h3><a id="linksTo" href="./lista_de_empleos.html">Ingeniero de Software</a></h3>
+          <small>Tech Solutions Inc. | Remoto</small>
+          <p>
+            Buscamos un ingeniero de Software con experiencia en desarrollo web
+            y conocimientos de Javascript, React y Node.js. El idea deber ser
+            capaz de trabajar en equipo y tener buenas habilidades de
+            comunicación.
+          </p>
+        </div>
+         <button class="button-apply-job">Aplicar</button>
+        </article>
 
-        <li>
-          <article class="job-listing-card">
-            <div>
-              <h3>Ingeniero de DevOps</h3>
-              <small>Cloud Services SA | Remoto</small>
-              <p>Estamos buscando un ingeniero de DevOps con experiencia en la gestión de infraestructuras en la nube,
-                automatización de procesos y herramientas de integración continua. Se requiere conocimiento en AWS,
-                Azure
-                oGCP.</p>
-            </div>
-            <button class="button-apply-job">Aplicar</button>
-          </article>
-        </li>
-      </ul>
+        <article class="job-listing-card">
+          <div>
+            <h3>Desarrollador de Aplicaciones Móviles</h3>
+            <small>Mobile Apps Ltd. | Guadalajara</small>
+            <p>Buscamos un desarrollador de aplicaciones móviles con experiencia en iOS y/o Android. El candidato debe
+              tener conocimientos en Swift, Kotlin y el desarrollo de interfaces de usuario.</p>
+          </div>
+          <button class="button-apply-job">Aplicar</button>
+        </article>
+
+        <article class="job-listing-card">
+          <div>
+            <h3>Ingeniero de DevOps</h3>
+            <small>Cloud Services SA | Remoto</small>
+            <p>Estamos buscando un ingeniero de DevOps con experiencia en la gestión de infraestructuras en la nube,
+              automatización de procesos y herramientas de integración continua. Se requiere conocimiento en AWS, Azure
+              oGCP.</p>
+          </div>
+          <button class="button-apply-job">Aplicar</button>
+        </article>
+      </div>
+          
 
 
       <nav class="pagination">
@@ -151,32 +156,50 @@
           aria-label, que indica el propósito del elemento a los lectores de pantalla
           title, que muestra su valor en un tooltip cuando el usuario hace hover sobre el elemento
           -->
-        <a href="" aria-label="Ir a la pagina de resultados anterior" title="Pagina anterior">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-left">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M11 7l-5 5l5 5" />
-            <path d="M17 7l-5 5l5 5" />
-          </svg>
-        </a>
+        <nav class="pagination">
+          <a href="" aria-label=" Ir a a la página de resultados anterior" title="página anterior">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-left"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M11 7l-5 5l5 5" />
+              <path d="M17 7l-5 5l5 5" />
+            </svg>
+          </a>
+          
+          <a class="is-active" href="#">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
 
-        <a class="is-active" href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-
-        <a href="" aria-label="Ir a la pagina de resultados siguiente" title="Pagina siguiente"><svg
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-right">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M7 7l5 5l-5 5" />
-            <path d="M13 7l5 5l-5 5" />
-          </svg></a>
-      </nav>
-
+          <a href="" aria-label=" Ir a a la página de resultados siguiente" title="página siguiente">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-right"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M7 7l5 5l-5 5" />
+              <path d="M13 7l5 5l-5 5" /></svg
+          ></a>
+        </nav>
   </main>
   <footer>
     <small>&copy; 2025 DevJobs. Todos los derechos reservados.</small>
