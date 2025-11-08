@@ -470,7 +470,7 @@ li:last-child article {
   padding: 0 1rem;
 }
 
-.empleoIng h3 {
+.empleoIng h2 {
   text-align: left;
   font-size: 1rem;
   color: var(--text-muted);
