@@ -12,34 +12,33 @@
 
 <body>
   <header>
- <h1>
-        <a class="logo" href="./index.html">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline points="16 18 22 12 16 6"></polyline>
-            <polyline points="8 6 2 12 8 18"></polyline>
-          </svg>
-          DevJobs
-        </a>
-      </h1>
+    <h1>
+      <a class="logo" href="./index.html">
+        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        DevJobs
+      </a>
+    </h1>
 
     <nav>
-      <a href="./index.html" target="_self" rel="noopener noreferrer">Inicio</a>
+      <!-- 
+      el atributo `target="_self"` es el valor por defecto. Los enlaces se abren en la misma pestaña/ventana por defecto, así que no hace falta especificarlo.
+      -->
+      <!-- 
+      El atributo `rel="noopener noreferrer"` es relevante cuando usas target="_blank" (abrir en nueva pestaña). Este atributo previene vulnerabilidades de seguridad y problemas de rendimiento al abrir enlaces externos en nuevas pestañas. Como estás usando target="_self" (valor por defecto), no tiene ningún efecto.
+      -->
+      <a href="./index.html">Inicio</a>
       <a href="./empleos.html">Empleos</a>
       <a href="">Empresas</a>
       <a href="">Salarios</a>
     </nav>
 
     <div>
-      <a aria-label="subir tu cv" href="">Subir CV</a>
-
+      <!-- El atributo aria-label se debe usar en los anchor y buttons solo si no tienen contenido de texto dentro que les de contexto. En este caso, el anchor ya tiene un texto que describe su propósito, por lo que no es necesario un aria-label -->
+      <a href="">Subir CV</a>
     </div>
 
   </header>
@@ -63,10 +62,7 @@
             En este caso, el input no necesita el atributo required.
             Si queremos filtrar por uno de los select, el input nos pedirá que ingresemos algo, lo cual, no tiene que ser obligatorio.
             -->
-          <input id="empleos-search-input"
-              type="text"
-              placeholder="Buscar trabajos, empresas o habilidades"
-            />
+          <input id="empleos-search-input" type="text" placeholder="Buscar trabajos, empresas o habilidades" />
         </div>
 
         <div class="search-filters">
@@ -109,45 +105,62 @@
     <section class="section">
       <h2>Resultados de búsqueda</h2>
 
-      <!-- Se puede entender que hay una lista de resultados de empleos. -->
-     
-         <div class="jobs-listings">
-        <article class="job-listing-card">
-        <div>
-          <h3><a aria-label="link a la descripcion del empleo" id="linksTo" href="./lista_de_empleos.html">Ingeniero de Software</a></h3>
-          <small>Tech Solutions Inc. | Remoto</small>
-          <p>
-            Buscamos un ingeniero de Software con experiencia en desarrollo web
-            y conocimientos de Javascript, React y Node.js. El idea deber ser
-            capaz de trabajar en equipo y tener buenas habilidades de
-            comunicación.
-          </p>
-        </div>
-         <button aria-label="aplicar" class="button-apply-job">Aplicar</button>
-        </article>
+      <!-- En vez de usar un div, se puede usar un ul con li internos. Esto es porque los resultados de búsqueda son una lista de elementos. -->
 
-        <article class="job-listing-card">
-          <div>
-            <h3>Desarrollador de Aplicaciones Móviles</h3>
-            <small>Mobile Apps Ltd. | Guadalajara</small>
-            <p>Buscamos un desarrollador de aplicaciones móviles con experiencia en iOS y/o Android. El candidato debe
-              tener conocimientos en Swift, Kotlin y el desarrollo de interfaces de usuario.</p>
-          </div>
-          <button aria-label="aplicar" class="button-apply-job">Aplicar</button>
-        </article>
+      <ul class="jobs-listings">
+        <li>
 
-        <article class="job-listing-card">
-          <div>
-            <h3>Ingeniero de DevOps</h3>
-            <small>Cloud Services SA | Remoto</small>
-            <p>Estamos buscando un ingeniero de DevOps con experiencia en la gestión de infraestructuras en la nube,
-              automatización de procesos y herramientas de integración continua. Se requiere conocimiento en AWS, Azure
-              oGCP.</p>
-          </div>
-          <button aria-label="aplicar" class="button-apply-job">Aplicar</button>
-        </article>
-      </div>
-          
+          <article class="job-listing-card">
+            <div>
+              <h3><a aria-label="link a la descripcion del empleo" id="linksTo" href="./lista_de_empleos.html">Ingeniero
+                  de Software</a></h3>
+              <small>Tech Solutions Inc. | Remoto</small>
+              <p>
+                Buscamos un ingeniero de Software con experiencia en desarrollo web
+                y conocimientos de Javascript, React y Node.js. El idea deber ser
+                capaz de trabajar en equipo y tener buenas habilidades de
+                comunicación.
+              </p>
+            </div>
+            <button aria-label="aplicar" class="button-apply-job">Aplicar</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="job-listing-card">
+            <div>
+              <h3>
+                <a aria-label="link a la descripcion del empleo" id="linksTo" href="./lista_de_empleos.html">
+                  Desarrollador de Aplicaciones Móviles
+                </a>
+              </h3>
+              <small>Mobile Apps Ltd. | Guadalajara</small>
+              <p>Buscamos un desarrollador de aplicaciones móviles con experiencia en iOS y/o Android. El candidato debe
+                tener conocimientos en Swift, Kotlin y el desarrollo de interfaces de usuario.</p>
+            </div>
+            <button aria-label="aplicar" class="button-apply-job">Aplicar</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="job-listing-card">
+            <div>
+              <h3>
+                <a aria-label="link a la descripcion del empleo" id="linksTo" href="./lista_de_empleos.html">
+                  Ingeniero de DevOps
+                </a>
+              </h3>
+              <small>Cloud Services SA | Remoto</small>
+              <p>Estamos buscando un ingeniero de DevOps con experiencia en la gestión de infraestructuras en la nube,
+                automatización de procesos y herramientas de integración continua. Se requiere conocimiento en AWS,
+                Azure
+                oGCP.</p>
+            </div>
+            <button aria-label="aplicar" class="button-apply-job">Aplicar</button>
+          </article>
+        </li>
+      </ul>
+
 
 
       <nav class="pagination">
@@ -158,24 +171,15 @@
           -->
         <nav class="pagination">
           <a href="" aria-label=" Ir a a la página de resultados anterior" title="página anterior">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-left"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-left">
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M11 7l-5 5l5 5" />
               <path d="M17 7l-5 5l5 5" />
             </svg>
           </a>
-          
+
           <a class="is-active" href="#">1</a>
           <a href="#">2</a>
           <a href="#">3</a>
@@ -183,22 +187,13 @@
           <a href="#">5</a>
 
           <a href="" aria-label=" Ir a a la página de resultados siguiente" title="página siguiente">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-right"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-right">
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M7 7l5 5l-5 5" />
-              <path d="M13 7l5 5l-5 5" /></svg
-          ></a>
+              <path d="M13 7l5 5l-5 5" />
+            </svg></a>
         </nav>
   </main>
   <footer>
