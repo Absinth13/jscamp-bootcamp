@@ -366,7 +366,7 @@ article {
   border-radius: 1rem;
   list-style: none;
 
-  article {
+  li article {
     background: none;
     box-shadow: none;
     border-radius: 0;
@@ -390,9 +390,10 @@ article {
       margin-top: 0.5rem;
     }
 
-    &:last-child {
-      border-bottom: none;
-    }
+  }
+
+  &:last-child article {
+    border-bottom: none;
   }
 }
 
@@ -461,7 +462,6 @@ select {
 
 li:last-child article {
   border-bottom: none;
-  background: #09f;
 }
 /*----------------------------------LISTA DE EMPLEOS----------------------------------------------*/
 
