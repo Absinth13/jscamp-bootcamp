@@ -1,95 +1,96 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
-    <title>DevJobs - Empleos</title>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Listado con empleos y filtros para encontrar el trabajo de tus sueños."
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Empleos</title>
     <link rel="stylesheet" href="./styles.css" />
-    <!-- Aquí están tus scripts -->
-    <script type="module" src="./fetch-data.js"></script>
-    <script type="module" src="./filters.js"></script>
     <script type="module" src="./apply-button.js"></script>
+     <script type="module" src="./fetch-data.js"></script>
+      <script type="module" src="./filters.js"></script>
+      
+   
+     
   </head>
 
   <body>
     <header>
       <h1>
-        <svg
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+      <a class="logo" href="./index.html">
+        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <polyline points="16 18 22 12 16 6"></polyline>
           <polyline points="8 6 2 12 8 18"></polyline>
         </svg>
         DevJobs
-      </h1>
-
-      <nav>
-        <a href="#">Empleos</a>
-      </nav>
-
-      <a href="#" aria-label="Ir a mi perfil" title="Mi perfil">
-        <img src="https://unavatar.io/github/mdo" alt="Avatar del usuario" width="32" height="32" />
       </a>
-    </header>
+    </h1>
+
+     <nav>
+      <!-- 
+      el atributo `target="_self"` es el valor por defecto. Los enlaces se abren en la misma pestaña/ventana por defecto, así que no hace falta especificarlo.
+      -->
+      <!-- 
+      El atributo `rel="noopener noreferrer"` es relevante cuando usas target="_blank" (abrir en nueva pestaña). Este atributo previene vulnerabilidades de seguridad y problemas de rendimiento al abrir enlaces externos en nuevas pestañas. Como estás usando target="_self" (valor por defecto), no tiene ningún efecto.
+      -->
+      <a href="./index.html">Inicio</a>
+      <a href="./empleos.html">Empleos</a>
+      <a href="">Empresas</a>
+      <a href="">Salarios</a>
+    </nav>
+
+    <div>
+      <!-- El atributo aria-label se debe usar en los anchor y buttons solo si no tienen contenido de texto dentro que les de contexto. En este caso, el anchor ya tiene un texto que describe su propósito, por lo que no es necesario un aria-label -->
+     <!--<a href="">Subir CV</a>--> 
+      <devjobs-avatar service="x" username="midudev" size="32"></devjobs-avatar>
+      
+    </div>
+    
+    
+  </header>
 
     <main>
       <section class="jobs-search">
         <h1>Encuentra tu próximo trabajo</h1>
         <p>Explora miles de oportunidades en el sector tecnológico.</p>
 
-        <form id="empleos-search-form" role="search">
-          <div class="search-bar">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-search"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-              <path d="M21 21l-6 -6" />
-            </svg>
+         <form id="empleos-search-form" role="search">
+        <div class="search-bar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+            <path d="M21 21l-6 -6" />
+          </svg>
 
-            <input
-              name="search"
-              id="empleos-search-input"
-              type="text"
-              placeholder="Buscar trabajos, empresas o habilidades"
-            />
-          </div>
+          <!--
+            En este caso, el input no necesita el atributo required.
+            Si queremos filtrar por uno de los select, el input nos pedirá que ingresemos algo, lo cual, no tiene que ser obligatorio.
+            -->
+          <input name="search" id="empleos-search-input" type="text" placeholder="Buscar trabajos, empresas o habilidades" />
+        </div>
 
           <div class="search-filters">
             <select name="technology" id="filter-technology">
               <option value="">Tecnología</option>
               <optgroup label="Tecnologías populares">
-                <option value="javascript">JavaScript</option>
-                <option value="python">Python</option>
-                <option value="react">React</option>
-                <option value="nodejs">Node.js</option>
-              </optgroup>
+              <option value="javascript">Javascript</option>
+              <option value="python">Python</option>
               <option value="java">Java</option>
-              <hr />
+              <option value="react">React</option>
+              <option value="nodejs">Node.js</option>
+              </optgroup>
+
+              <option value="java">Java</option>
+              <hr/>
               <option value="csharp">C#</option>
               <option value="c">C</option>
               <option value="c++">C++</option>
-              <hr />
+              <hr/>
               <option value="ruby">Ruby</option>
               <option value="php">PHP</option>
+              
             </select>
 
             <select name="location" id="filter-location">
@@ -99,75 +100,72 @@
               <option value="guadalajara">Guadalajara</option>
               <option value="monterrey">Monterrey</option>
               <option value="barcelona">Barcelona</option>
+              <option value="valencia">Valencia</option>
+              <option value="buenosA">Buenos Aires</option>
+              <option value="bogota">Bogotá</option>
+              <option value="lima">Lima</option>
+              <option value="sdChile">Santiago de Chile</option>
             </select>
 
-            <select name="experience-level" id="filter-experience-level">
-              <option value="">Nivel de experiencia</option>
+           <select name="experience-level" id="filter-experience-level">
+              <option value="">Nivel de Experiencia</option>
               <option value="junior">Junior</option>
-              <option value="mid">Mid-level</option>
+              <option value="mid">Mid-Level</option>
               <option value="senior">Senior</option>
               <option value="lead">Lead</option>
             </select>
           </div>
         </form>
+
+        <span id="filter-selected-value"></span>
+         
       </section>
 
-      <section class="jobs-result">
-        <h2>Resultados de búsqueda</h2>
+       <section>
+      <h2>Resultados de búsqueda</h2>
 
-        <ul class="jobs-listings">
-          <!-- Aquí se insertan los empleos dinámicamente -->
-        </ul>
+      <!-- En vez de usar un div, se puede usar un ul con li internos. Esto es porque los resultados de búsqueda son una lista de elementos. -->
 
+      <ul class="jobs-listings">
+        <!--Aqui se insertan los empleos dinámicamente-->
+       
+      </ul>
+
+    <nav class="pagination">
+        <!--
+          Si un anchor o un button no tiene texto dentro que indique el propósito del elemento, es recomendable usar estos dos atributos:
+          aria-label, que indica el propósito del elemento a los lectores de pantalla
+          title, que muestra su valor en un tooltip cuando el usuario hace hover sobre el elemento
+          -->
         <nav class="pagination">
-          <a
-            href="#"
-            aria-label="Ir a la página anterior de los resultados de búsqueda"
-            title="Página anterior"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
+          <a href="" aria-label=" Ir a a la página de resultados anterior" title="página anterior">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-left">
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M15 6l-6 6l6 6" />
+              <path d="M11 7l-5 5l5 5" />
+              <path d="M17 7l-5 5l5 5" />
             </svg>
           </a>
+
           <a class="is-active" href="#">1</a>
           <a href="#">2</a>
           <a href="#">3</a>
           <a href="#">4</a>
           <a href="#">5</a>
-          <a
-            href="#"
-            aria-label="Ir a la página siguiente de los resultados de búsqueda"
-            title="Página siguiente"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M9 6l6 6l-6 6" />
-            </svg>
-          </a>
-        </nav>
-      </section>
-    </main>
 
+          <a href="" aria-label=" Ir a a la página de resultados siguiente" title="página siguiente">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-right">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M7 7l5 5l-5 5" />
+              <path d="M13 7l5 5l-5 5" />
+            </svg></a>
+        </nav>
+        
+      </section>
+  </main>
     <footer>
       <small>&copy; 2025 DevJobs. Todos los derechos reservados.</small>
     </footer>
