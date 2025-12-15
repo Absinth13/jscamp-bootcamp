@@ -9,6 +9,13 @@ fetch("./data.json") /* fetch es asíncrono */
     return response.json();
   })
   .then((jobs) => {
+/*  DocumentFragment es como un contenedor temporal invisible que nos permite
+    crear y organizar elementos antes de agregarlos al DOM.
+    Ventaja: en vez de agregar cada elemento uno por uno (lo que hace que el navegador redibuje la página muchas veces), los agrupamos todos aquí y los agregamos de una sola vez.
+    Esto hace que la página cargue más rápido y sea más eficiente :)
+    Si bien no lo dimos en el curso, y. es util cuando tenemos muchos mas elementos, sentimos que no esta de más comentarlo :)    
+*/
+    const fragmentContainer = document.createDocumentFragment()
     jobs.forEach(job => {
       const article = document.createElement('article')
       article.className = 'job-listing-card'
@@ -26,6 +33,7 @@ fetch("./data.json") /* fetch es asíncrono */
         <button class="button-apply-job">Aplicar</button>
       `;
 
-      container.appendChild(article)
+      fragmentContainer.appendChild(article)
     })
-  });/* Aquí va la lógica para mostrar los resultados de búsqueda */
+    container.appendChild(fragmentContainer)
+  });
