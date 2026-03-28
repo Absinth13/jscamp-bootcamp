@@ -7,7 +7,7 @@
     "descripcion": "Buscamos un ingeniero de software con experiencia en desarrollo web y conocimientos en JavaScript, React y Node.js. El candidato ideal debe ser capaz de trabajar en equipo y tener buenas habilidades de comunicación.",
     "data": {
       "technology": "javascript",
-      "modalidad": "remoto",
+      "location": "remoto",
       "nivel": "senior"
     }
   },
@@ -19,7 +19,7 @@
     "descripcion": "Estamos buscando un analista de datos con experiencia en el manejo de grandes conjuntos de datos y herramientas de visualización. Se requiere conocimiento en SQL, Python y R.",
     "data": {
       "technology": "python",
-      "modalidad": "cdmx",
+      "location": "cdmx",
       "nivel": "junior"
     }
   },
@@ -31,8 +31,8 @@
     "descripcion": "Buscamos un desarrollador de aplicaciones móviles con experiencia en iOS y/o Android. El candidato debe tener conocimientos en Swift, Kotlin y el desarrollo de interfaces de usuario.",
     "data": {
       "technology": "mobile",
-      "modalidad": "guadalajara",
-      "nivel": "mid-level"
+      "location": "guadalajara",
+      "nivel": "mid"
     }
   },
   {
@@ -43,8 +43,8 @@
     "descripcion": "Estamos buscando un ingeniero de DevOps con experiencia en la gestión de infraestructuras en la nube, automatización de procesos y herramientas de integración continua. Se requiere conocimiento en AWS, Azure o GCP.",
     "data": {
       "technology": "mobile",
-      "modalidad": "remoto",
-      "nivel": "mid-level"
+      "location": "Remoto",
+      "nivel": "mid"
     }
   },
   {
@@ -55,8 +55,8 @@
     "descripcion": "Estamos buscando un diseñador UX/UI con pasión por crear experiencias digitales excepcionales. Se requiere experiencia en Figma, diseño centrado en el usuario y colaboración con equipos de desarrollo.",
     "data": {
       "technology": "mobile",
-      "modalidad": "barcelona",
-      "nivel": "mid-level"
+      "location": "barcelona",
+      "nivel": "mid"
     }
   },
   {
@@ -67,8 +67,8 @@
     "descripcion": "Se busca un administrador de bases de datos con experiencia en PostgreSQL y MySQL. El candidato deberá asegurar la disponibilidad, seguridad y rendimiento de las bases de datos de producción.",
     "data": {
       "technology": "mobile",
-      "modalidad": "bsas",
-      "nivel": "mid-level"
+      "location": "bsas",
+      "nivel": "mid"
     }
   },
   {
@@ -79,8 +79,8 @@
     "descripcion": "Buscamos un especialista en ciberseguridad con conocimientos en protección de infraestructuras, análisis de vulnerabilidades y respuesta ante incidentes. Se valorará experiencia con SIEM y certificaciones de seguridad.",
     "data": {
       "technology": "mobile",
-      "modalidad": "remoto",
-      "nivel": "mid-level"
+      "location": "remoto",
+      "nivel": "mid"
     }
   },
   {
@@ -91,7 +91,7 @@
     "descripcion": "Estamos buscando un Product Manager con experiencia en la definición y lanzamiento de productos digitales. Se requiere capacidad analítica, liderazgo y conocimiento en metodologías ágiles.",
     "data": {
       "technology": "mobile",
-      "modalidad": "madrid",
+      "location": "madrid",
       "nivel": "senior"
     }
   },
@@ -103,8 +103,8 @@
     "descripcion": "Buscamos un desarrollador frontend con experiencia en React, TypeScript y Tailwind CSS. Se valorará conocimiento en optimización de rendimiento y accesibilidad web.",
     "data": {
       "technology": "react",
-      "modalidad": "valencia",
-      "nivel": "mid-level"
+      "location": "valencia",
+      "nivel": "mid"
     }
   },
   {
@@ -115,7 +115,7 @@
     "descripcion": "Estamos buscando un desarrollador backend con experiencia en Node.js, Express y bases de datos NoSQL. Se requiere conocimiento en arquitectura de microservicios.",
     "data": {
       "technology": "node",
-      "modalidad": "bogota",
+      "location": "bogota",
       "nivel": "mid"
     }
   },
@@ -127,7 +127,7 @@
     "descripcion": "Buscamos un ingeniero de machine learning con experiencia en modelos de predicción y procesamiento de datos. Se valorará conocimiento en TensorFlow, PyTorch y MLOps.",
     "data": {
       "technology": "python",
-      "modalidad": "remoto",
+      "location": "remoto",
       "nivel": "senior"
     }
   },
@@ -139,8 +139,8 @@
     "descripcion": "Se busca ingeniero de QA con experiencia en automatización de pruebas utilizando herramientas como Selenium, Cypress o Playwright. Conocimiento deseado en CI/CD.",
     "data": {
       "technology": "mobile",
-      "modalidad": "lima",
-      "nivel": "mid-level"
+      "location": "lima",
+      "nivel": "mid"
     }
   },
   {
@@ -151,8 +151,8 @@
     "descripcion": "Buscamos un administrador de sistemas con experiencia en Linux, Docker y monitoreo de servidores. Conocimiento en scripting Bash o Python será un plus.",
     "data": {
       "technology": "mobile",
-      "modalidad": "santiago",
-      "nivel": "mid-level"
+      "location": "santiago",
+      "nivel": "mid"
     }
   },
   {
@@ -163,8 +163,8 @@
     "descripcion": "Estamos buscando un Scrum Master con experiencia en metodologías ágiles y gestión de equipos multidisciplinarios. Certificación Scrum Master deseable.",
     "data": {
       "technology": "mobile",
-      "modalidad": "madrid",
-      "nivel": "mid-level"
+      "location": "madrid",
+      "nivel": "mid"
     }
   },
   {
@@ -175,7 +175,7 @@
     "descripcion": "Buscamos un técnico de soporte con habilidades en resolución de incidencias, redes y sistemas operativos. Se requiere atención al detalle y excelente trato con el usuario.",
     "data": {
       "technology": "mobile",
-      "modalidad": "monterrey",
+      "location": "monterrey",
       "nivel": "junior"
     }
   }

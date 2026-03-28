@@ -26,7 +26,10 @@
 
 ## Séptima parte
 
-<!-- Dudas de la séptima parte del ejercicio -->
+<!-- Hola Madeval, ya he revisado varias veces mi codigo, pero no logro encontrar
+por que no me funciona la parte de SAP?, cuando voy a la network en la consola, me 
+muestra todo lo que tengo en la página más no solo como si fuera todo una imagen como en el 
+ejercicio de Midu D:. -->
 
 ## Ejercicio extra
 

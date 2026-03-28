@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Empleos</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./apply-button.js"></script>
+     <script type="module" src="./fetch-data.js"></script>
+      <script type="module" src="./filters.js"></script>
+      <script type="module" src="./devjobs-avatar-element.js"></script>
+
+   
+     
+  </head>
+
+  <body>
+    <header>
+      <h1>
+      <a class="logo" href="./index.html">
+        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        DevJobs
+      </a>
+    </h1>
+
+     <nav>
+      <!-- 
+      el atributo `target="_self"` es el valor por defecto. Los enlaces se abren en la misma pestaña/ventana por defecto, así que no hace falta especificarlo.
+      -->
+      <!-- 
+      El atributo `rel="noopener noreferrer"` es relevante cuando usas target="_blank" (abrir en nueva pestaña). Este atributo previene vulnerabilidades de seguridad y problemas de rendimiento al abrir enlaces externos en nuevas pestañas. Como estás usando target="_self" (valor por defecto), no tiene ningún efecto.
+      -->
+      <a href="./index.html">Inicio</a>
+      <a href="./empleos.html">Empleos</a>
+      <a href="">Empresas</a>
+      <a href="">Salarios</a>
+    </nav>
+
+    <div>
+      <!-- El atributo aria-label se debe usar en los anchor y buttons solo si no tienen contenido de texto dentro que les de contexto. En este caso, el anchor ya tiene un texto que describe su propósito, por lo que no es necesario un aria-label -->
+     <!--<a href="">Subir CV</a>--> 
+      <devjobs-avatar service="x" username="midudev" size="32"></devjobs-avatar>
+      
+    </div>
+    
+    
+  </header>
+
+    <main>
+      <section class="jobs-search">
+        <h1>React.js primeros pasos</h1>
+        
+      </section>
+
+      
+  </main>
+    <footer>
+      <small>&copy; 2025 DevJobs. Todos los derechos reservados.</small>
+    </footer>
+  </body>
+</html>
