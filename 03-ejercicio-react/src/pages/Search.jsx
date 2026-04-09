@@ -22,12 +22,19 @@ const useFilters = () =>{
   useEffect(() => {
     async function fetchJobs(){
       try {
-        setLoading(true)
-       const params = new URLSearchParams () 
-       if (textToFilter) params.append ('text', textToFilter)
-       if (filters.technology)params.append('technology', filters.technology)
-       if (filters.location)params.append('type', filters.location)
-       if (filters.experienceLevel)params. append('level',filters.experienceLevel)
+       setLoading(true)
+
+       const params = new URLSearchParams() 
+       
+       // Podemos crear una función auxiliar para añadir parámetros solo si tienen valor, y evitar tantos `if`. Esto es opcional, como estaba antes también está genial :) Es solo para mostrar una manera diferente de afrontar el escenario de `if` anidados.
+       function appendParamIfExist(key, value) {
+        if (value) params.append(key, value)
+       }
+
+       appendParamIfExist('text', textToFilter)
+       appendParamIfExist('technology', filters.technology)
+       appendParamIfExist('type', filters.location)
+       appendParamIfExist('level', filters.experienceLevel)
 
       const offset = (currentPage -1) * RESULTS_PER_PAGE
       params.append('limit', RESULTS_PER_PAGE)
@@ -44,6 +51,7 @@ const useFilters = () =>{
       } catch(error){
         console.error('error fetching jobs' , error)
       }finally {
+        // Excelente esto!
         setLoading(false)
       }
     } 
