@@ -10,23 +10,35 @@ export function Pagination({currentPage =1, totalPages=10 , onPageChange}){
 
   const handlePrevClick = (event) =>{
     event.preventDefault()
+    /* Esto está genial! Pero... que pasa si tenemos mas funcionalidades que agregar dentro del if? Queda un poco feo. Hay una manera de programar que nos permite evaluar el caso negativo primero y luego el caso positivo, así no tenemos que colocar lógica dentro de `if` */
+    /* if(!isFirstPage){
+      onPageChange(currentPage -1)
+    } */
+
+    // 1. Esto se lee como: "Si no es la primera página, entonces cambia de página"
+    // 2. Esto se lee como: "Si es la primera página, no hagas nada"
     if(!isFirstPage){
       onPageChange(currentPage -1)
     }
+
+    // Pero si lo cambiamos, podemos leerlo así:
+    // 1. Esto se lee como: "Si es la primera página, no hagas nada"
+    // 2. Esto se lee como: "Si no es la primera página, entonces cambia de página"
+    if(isFirstPage) return
+    onPageChange(currentPage -1)
   }
 
   const handleNextClick = (event)=> {
     event.preventDefault()
-    if (isLastPage === false){
-      onPageChange(currentPage + 1)
-    }
+    if (isLastPage) return
+    onPageChange(currentPage + 1)
   }
 
   const handleChangePage = (event, page) =>{
     event.preventDefault()
-    if (page !== currentPage){
-      onPageChange(page)
-    }
+    
+    if (page === currentPage) return
+    onPageChange(page)
   }
 
 
