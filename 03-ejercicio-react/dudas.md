@@ -31,6 +31,12 @@ por que no me funciona la parte de SAP?, cuando voy a la network en la consola, 
 muestra todo lo que tengo en la página más no solo como si fuera todo una imagen como en el 
 ejercicio de Midu D:. -->
 
+### Respuesta
+
+Hola crack! Estuve probando tu código y la network y funciona bien. Lo que hizo midu en el video fue eliminar el historial una vez recargó en la página `search`, por eso solo le aparecían los resultados de las imágenes, pero lo normal es ver todo el contenido de la página en la network, y luego al cambiar de página, solo se agregue la imagen y alguna cosita más (dependiendo del código).
+
+Me puedes escribir por Discord y lo vemos más a detalle si quieres.
+
 ## Ejercicio extra
 
 <!-- Dudas del ejercicio extra -->
