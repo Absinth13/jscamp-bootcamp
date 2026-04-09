@@ -9,10 +9,8 @@ const useSearchForm = ({idTechnology, idLocation, idExperienceLevel, idText, onS
     console.log('submit')
   
   const formData = new FormData(event.currentTarget)
-  if(event.target.name === idText){
-    return 
-
-  }
+  // Excelente esto! Le saqué las llaves para que quedase en una sola línea
+  if(event.target.name === idText) return 
 
 const filters = {
       
