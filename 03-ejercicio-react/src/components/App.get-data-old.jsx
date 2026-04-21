@@ -21,12 +21,15 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1)
 
   const jobsFilteredByFilters = jobsData.filter(job=> {
-    return(
-      (filters.technology === '' || job.data.technology === filters.technology) &&
-      
-       (filters.location === '' || job.data.location === filters.location) &&
-       (filters.experienceLevel ==='' || job.data.nivel === filters. experienceLevel)
+    /* Si lo hacemos así, queda más fácil de leer */
+    const technologyMatch = filters.technology === '' || job.data.technology === filters.technology
+    const locationMatch = filters.location === '' || job.data.location === filters.location
+    const experienceLevelMatch = filters.experienceLevel ==='' || job.data.nivel === filters. experienceLevel
 
+    return(
+      technologyMatch &&
+      locationMatch &&
+      experienceLevelMatch
     )
   })
  
