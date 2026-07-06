@@ -1,6 +1,13 @@
-import { Link } from './Link'
+import {NavLink} from 'react-router-dom'
+import { Link } from "./Link";
+import { useAuthStore } from '../store/authStore'
+import {useFavoritesStore} from '../store/favoritesStore'
 
 export function Header() {
+  const {isLoggedIn} = useAuthStore()
+  const {countFavorites} = useFavoritesStore()
+  const numberOfFavorites = countFavorites()
+
   return (
     <header>
       <Link href="/" style={{ textDecoration: 'none' }}>
@@ -20,12 +27,31 @@ export function Header() {
           DevJobs
         </h1>
       </Link>
+ 
+      <nav> 
+        <NavLink to="/">Inicio</NavLink>
+        <NavLink className={({isActive}) => isActive ? 'nav-link-active' : ''} to="/search">Empleos</NavLink>
+        {
+          isLoggedIn && (
 
-      <nav>
-        <Link href="/search">Empleos</Link>
+            <NavLink className={({isActive}) => isActive ? 'nav-link-active' : ''} to="/profile">
+            Profile ❤️ {numberOfFavorites }</NavLink>
 
-        <a href="/search">Sin SPA</a>
+          )
+        }
       </nav>
+
+      <HeaderUserButton/>
+
     </header>
   )
+}
+
+const HeaderUserButton =()=>{
+  const {isLoggedIn, login, logout} = useAuthStore()
+
+  return isLoggedIn
+        ? <button onClick={logout}>Cerrar Sesión</button>
+        : <button onClick={login}>Iniciar Sesión</button>
+      
 }

@@ -429,3 +429,10 @@ article {
     pointer-events: none;
   }
 }
+
+.nav-link-active{
+  color: var( --text-muted);
+  pointer-events: none;
+  opacity: 0.5;
+  user-select: none;
+}

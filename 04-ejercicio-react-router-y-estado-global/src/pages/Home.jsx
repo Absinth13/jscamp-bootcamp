@@ -1,6 +1,7 @@
 import { useRouter } from "../hooks/useRouter"
 
-export function HomePage () {
+
+export default function HomePage () {
   const { navigateTo } = useRouter()
 
   const handleSearch = (event) => {
@@ -18,7 +19,7 @@ export function HomePage () {
   return (
     <main>
       <section>
-        <img src="./background.webp" width="200" />
+       <img src="/background.webp" width="200" />
 
         <h1>Encuentra el trabajo de tus sueños</h1>
 
