@@ -1,7 +1,7 @@
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router';
+import { useAuthStore } from '../store/authStore';
+import { useFavoritesStore } from '../store/favoritesStore';
 import { Link } from "./Link";
-import { useAuthStore } from '../store/authStore'
-import {useFavoritesStore} from '../store/favoritesStore'
 
 export function Header() {
   const {isLoggedIn} = useAuthStore()

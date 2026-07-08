@@ -1,7 +1,7 @@
 import { useId } from 'react'
-import { useNavigate } from 'react-router-dom'
-import styles from './Auth.module.css'
+import { useNavigate } from 'react-router'
 import { useAuthStore } from '../store/authStore'
+import styles from './Auth.module.css'
 
 export default function Register() {
   const nameId = useId()
