@@ -6,7 +6,6 @@ const argu = process.argv.slice(2)
 const isAsc = argu.includes('--asc')
 const isDesc = argu.includes('--desc')
 
-
 //Tercer ejercicio filtrar archivos y carpetas
 const isFiles = argu.includes('--files')
 const isFolders = argu.includes('--folders')
@@ -47,8 +46,6 @@ for (const entry of entries){
 const icon= entry.isDir ? '🗂️' : '📄'
 const size = entry.isDir ? '-' : `${entry.size}`
 console.log(`${icon}   ${entry.name.padEnd(25)}    ${size}`)
-
-
 }
  
 
