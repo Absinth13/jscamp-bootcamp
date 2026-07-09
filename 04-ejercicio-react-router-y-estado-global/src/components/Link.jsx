@@ -1,3 +1,4 @@
+import {NavLink } from 'react-router'
 import { NavLink } from 'react-router'
 
 export function Link({href, children, ...restOfProps}){
