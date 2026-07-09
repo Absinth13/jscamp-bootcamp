@@ -36,7 +36,7 @@ function DetailPageBreadCrumb({job}){
     )
 }
 
-function DetailPageHeader({ job}) {
+function DetailPageHeader({ job }) {
   return (
     <>
       <header className={styles.header}>

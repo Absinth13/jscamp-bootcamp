@@ -75,7 +75,6 @@ const useFilters = () => {
 
     if (currentPage > 1) params.set('page', currentPage)
 
-
     return params
     })
     

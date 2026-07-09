@@ -1,9 +1,5 @@
 import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router'
-		
-import { JobListings } from '../components/JobListings.jsx'
-import { Pagination } from '../components/Pagination.jsx'
-import { SearchFormSection } from '../components/SearchFormSection.jsx'
 
 import { Footer } from './components/Footer.jsx'
 import { Header } from './components/Header.jsx'
@@ -42,6 +38,7 @@ function App() {
   )
 }
 
+/* Podemos pasarlo a un componente para que quede más limpio */
 const Fallback = () => {
   return <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>Cargando...</div>
 }
