@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams, useNavigate} from 'react-router-dom'
+import { useSearchParams } from 'react-router'
+import { JobListings } from '../components/JobListings.jsx'
 import { Pagination } from '../components/Pagination.jsx'
 import { SearchFormSection } from '../components/SearchFormSection.jsx'
-import { JobListings } from '../components/JobListings.jsx'
 
    
 const RESULTS_PER_PAGE = 4
@@ -30,7 +30,7 @@ const useFilters = () => {
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true)
 
-  const navigate = useNavigate()
+ 
 
 
  useEffect(() =>{
@@ -75,9 +75,6 @@ const useFilters = () => {
 
     if (currentPage > 1) params.set('page', currentPage)
 
-    const newUrl = params.toString()
-      ? `${window.location.pathname}?${params.toString()}`
-      : window.location.pathname
 
     return params
     })

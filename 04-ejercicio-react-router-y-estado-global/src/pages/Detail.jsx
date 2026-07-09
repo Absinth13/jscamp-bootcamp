@@ -1,10 +1,9 @@
-import{useState, useEffect} from 'react'
-import{useParams, useNavigate} from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router'
 import snarkdown from 'snarkdown'
-import styles from './Detail.module.css'
 import { useAuthStore } from "../store/authStore"
 import { useFavoritesStore } from "../store/favoritesStore"
+import styles from './Detail.module.css'
 
 function JobSection({title, content}){
     const html = snarkdown(content || "")
@@ -37,7 +36,7 @@ function DetailPageBreadCrumb({job}){
     )
 }
 
-function DetailPageHeader({ job, children }) {
+function DetailPageHeader({ job}) {
   return (
     <>
       <header className={styles.header}>
@@ -72,7 +71,7 @@ function DetailFavoriteButton({ jobId }) {
 }
 
 
-export default function JobDetail({}){
+export default function JobDetail(){
     const {jobId} = useParams()
    
     const navigate = useNavigate()
