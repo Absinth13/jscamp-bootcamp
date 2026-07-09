@@ -5,6 +5,13 @@ carga, es la imagen que esta en el folder public, la del inicio.
 me ha pasado todas las veces que he actualizado el repositorio para hacer los ejercicios.
 sabes por que pasa? D: 
 
+**Respuesta:**
+
+Solucionado! No es problema de código o tuyo. Debe ser un error de como se hace la actualización del repositorio desde la página de `jscamp.dev`, que no lo sube bien.
+
+Desde VSCode, si seleccionas la imagen se debería de ver bien, si no se ve, es porque hay un error en el formato.
+Lo que hice fue copiar la imagen del proyecto de `03-ejercicio-react` y pegarla aquí (esa imagen si que andaba bien) :)
+
 ## Primera parte
 Hola Madeval, te escribi en discord, mi duda era como Midu hizo la parte de react router sin la terminación dom ?
 me puse a leer lo que un companiero nos paso que para esa actualizacion ya no era necesario
@@ -12,8 +19,12 @@ poner la terminacion dom, instale justo el que Midu dijo , lo intente varias vec
 pero siempre me hacia esos jump, hasta que lo pase a react-router-dom. 
 entiendo que cuando es dom es para web, pero sigo con la duda por que con Midu corria bien el programa sin la terminacion dom.
 
+**Respuesta:**
+Hola! Bueno, lo estuvimos siguiendo por Discord, pero la manera correcta es usar `react-router`, no `react-router-dom`, lo que puede estar generando el error intuyo que pueden ser 2 cosas:
+- el navegador, probaría otro para estar seguros
+- una extensión, abrí el proyecto en modo incógnito y veamos que pasa
 
-
+Es importante ver si en la consola del navegador hay algún error también
 
 
 ## Segunda parte

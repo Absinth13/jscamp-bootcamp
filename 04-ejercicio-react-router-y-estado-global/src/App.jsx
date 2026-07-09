@@ -1,8 +1,8 @@
-import { lazy, Suspense } from 'react' 
-import { Routes, Route } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+import { Route, Routes } from 'react-router'
 
-import { Header } from './components/Header.jsx'
 import { Footer } from './components/Footer.jsx'
+import { Header } from './components/Header.jsx'
 import { ProtectedRoute } from './components/ProtectedRoute.jsx'
 
 const HomePage = lazy(() => import('./pages/Home.jsx'))
@@ -18,7 +18,7 @@ function App() {
     <>
       <Header />
 
-      <Suspense fallback={<div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>Cargando...</div>}>
+      <Suspense fallback={<Fallback />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />} />
@@ -36,6 +36,11 @@ function App() {
       <Footer />
     </>
   )
+}
+
+/* Podemos pasarlo a un componente para que quede más limpio */
+const Fallback = () => {
+  return <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>Cargando...</div>
 }
 
 export default App
