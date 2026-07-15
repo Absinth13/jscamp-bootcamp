@@ -70,15 +70,17 @@ const users = [
 const server = createServer(async (req, res) => {
   const { method, url } = req
   const newUrL = new URL(url, `http://localhost:${port}`)
+  const nameQry = newUrL.searchParams.get('name')
  
   // GET /users filtros + paginación
   if (method === 'GET' && newUrL.pathname === '/users') {
   
-  const nameQry = newUrL.searchParams.get('name')
-  const limit = parseInt(newUrL.searchParams.get('limit')) || users.length
-  const offset = parseInt(newUrL.searchParams.get('offset'))|| 0
-  const minAge = parseInt(newUrL.searchParams.get('minAge'))
-  const maxAge = parseInt(newUrL.searchParams.get('maxAge'))
+ 
+  const limit = Number(newUrL.searchParams.get('limit')) || users.length
+  const offset = Number(newUrL.searchParams.get('offset')) || 0
+  const minAge = Number(newUrL.searchParams.get('minAge'))
+  const maxAge = Number(newUrL.searchParams.get('maxAge'))
+
   
   let filteredUsers = users
  //Filtrado por nombre
