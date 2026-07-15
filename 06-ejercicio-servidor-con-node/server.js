@@ -1,17 +1,18 @@
 import { createServer } from 'node:http'
+import {json} from 'node:stream/consumers'
+import {randomUUID} from 'node:crypto'
+
 
 process.loadEnvFile()
 
 const port = process.env.PORT || 3000
 
-const server = createServer((req, res) => {
-  // TODO: Aquí irá la lógica del servidor
-})
+function sendJson(res, statusCode, data){
+  res.statusCode = statusCode
+  res.setHeader('Content-Type', 'application/json; chartset=utf-8')
+  res.end(JSON.stringify(data))
+}
 
-server.listen(port, () => {
-  const address = server.address()
-  console.log(`Servidor escuchando en http://localhost:${address.port}`)
-})
 
 const users = [
   {
@@ -65,3 +66,69 @@ const users = [
     age: 30,
   },
 ]
+
+const server = createServer(async (req, res) => {
+  const { method, url } = req
+  const newUrL = new URL(url, `http://localhost:${port}`)
+ 
+  // GET /users filtros + paginación
+  if (method === 'GET' && newUrL.pathname === '/users') {
+  
+  const nameQry = newUrL.searchParams.get('name')
+  const limit = parseInt(newUrL.searchParams.get('limit')) || users.length
+  const offset = parseInt(newUrL.searchParams.get('offset'))|| 0
+  const minAge = parseInt(newUrL.searchParams.get('minAge'))
+  const maxAge = parseInt(newUrL.searchParams.get('maxAge'))
+  
+  let filteredUsers = users
+ //Filtrado por nombre
+  if (nameQry) {
+      filteredUsers = filteredUsers.filter(user =>
+        user.name.toLowerCase().startsWith(nameQry.toLowerCase())
+      )
+     return sendJson(res, 200, filteredUsers)
+  }
+
+  //Filtro por edad 
+  if(!isNaN(minAge)){
+    filteredUsers = filteredUsers.filter(user => user.age >= minAge)
+  }
+  if(!isNaN(maxAge)){
+    filteredUsers = filteredUsers.filter(user => user.age <= maxAge)
+  }
+  //paginación 
+  const pagUsers = filteredUsers.slice(offset, offset + limit)
+  return sendJson(res, 200,pagUsers)
+}
+
+  // GET /health
+  if (method === 'GET' && newUrL.pathname === '/health') {
+    return sendJson(res, 200, { status: 'ok', uptime: process.uptime() })
+  }
+
+  // POST /users
+  if (method === 'POST' && newUrL.pathname === '/users') {
+    const body = await json(req)
+    
+    if (!body || !body.name && !body || !body.age){
+       return sendJson(res, 404, { error: 'Name and age is required' })
+    } 
+            
+    const newUser = {
+      name: body.name,
+      age: body.age,
+      id: randomUUID(),
+    }
+
+    users.push(newUser)
+    return sendJson(res, 201, { message: 'Usuario creado', user: newUser })
+  }
+
+  // Si no coincide ninguna ruta marcar error
+  return sendJson(res, 404, { error: 'Not Found' })
+})
+
+server.listen(port, () => {
+  const address = server.address()
+  console.log(`Servidor escuchando en http://localhost:${address.port}`)
+})
