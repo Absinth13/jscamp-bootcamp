@@ -30,6 +30,27 @@ asi se ve cuando ya abre los demas datos
   }
 ]
 
+**Respuesta:**
+Puse un comentario en el código pero te lo comento aquí:
+A la hora de crear un nuevo usuario haces esto:
+
+```js      
+const newUser = {
+  name: body.name,
+  age: body.age,
+  id: randomUUID(), // <- Aquí está el porque te aparece el `id` en la parte de abajo cuando creas un nuevo usuario. Si lo subes hasta arriba aparecerá ahí
+}
+```
+
+Si pones el `id` arriba, se soluciona, el `newUser` se guarda como lo creaste.
+
+```js
+const newUser = {
+  id: randomUUID(), // <- Si lo pones aquí se soluciona
+  name: body.name,
+  age: body.age,
+}
+```
 
 Para la ultima parte del ejercicio tres Probando tu API con curl , no me funciona con curl , use powershell en la terminal de Visual Studio C 
 Cuando ponia 
@@ -71,3 +92,10 @@ InputFields       : {}
 Links             : {}
 ParsedHtml        : mshtml.HTMLDocumentClass
 RawContentLength  : 105
+
+
+**Respuesta:**
+Puede ser un error del puerto, verificaste que ese puerto este abierto en ese momento? Tu aplicación dependiendo de tu `.env`, si lo tienes o no, puede ir a `3000` o `1234`.
+
+Si puedes intentar de nuevo genial! Sino avisame por Discord porfi :)
+
