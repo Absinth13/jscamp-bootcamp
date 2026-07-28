@@ -1,10 +1,11 @@
 /* Aquí debe ir la lógica de tu controlador */
-import {JobModel} from '../models/job.js'
-import {DEFAULTS} from '../config.js'
+import { DEFAULTS } from '../config.js'
+import { JobModel } from '../models/job.js'
 
 export class JobController {
     static async getAll(req, res){
-        const {text, titulo, level, limit = DEFAULTS.LIMIT_PAGINATION, 
+        // Ahora se llama `texto`
+        const {texto: text, titulo, level, limit = DEFAULTS.LIMIT_PAGINATION, 
         technology, offset = DEFAULTS.LIMIT_OFFSET} = req.query
 
         const {data, total} = await JobModel.getAll({ text, titulo, level, limit, technology, offset})
