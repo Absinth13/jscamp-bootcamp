@@ -1,10 +1,12 @@
 
 /* Recuerda que el modelo SOLO debe manejar la lógica de los datos, en este caso nuestro JSON */
-import jobs from '../jobs.json' with { type: 'json' }
 import crypto from 'node:crypto'
+import { DEFAULTS } from '../config'
+import jobs from '../jobs.json' with { type: 'json' }
 
 export class JobModel {
-  static async getAll({ texto, titulo, level, limit = 10, technology, offset = 0 }) {
+  // EN vez de valores hardcodeados, usaremos los que vienen de la constante global
+  static async getAll({ texto, titulo, level, limit = DEFAULTS.LIMIT_PAGINATION, technology, offset = DEFAULTS.LIMIT_OFFSET }) {
 
     const filteredJobs = jobs.filter(job => {
 
@@ -12,36 +14,44 @@ export class JobModel {
       const descripcion = job.descripcion?.toLowerCase() ?? ''
       const tecnologias = job.data?.technology ?? []
       const jobLevel = job.data?.nivel?.toLowerCase() ?? ''
+      const searchTerm = texto?.toLowerCase() ?? ''
 
-      if (texto) {
-        const searchTerm = texto.toLowerCase()
+      // Podemos simplificar un poco esto, a ver que opinas:
+      // De esta manera podemos agregar validaciones por separado
+      const isInvalidText = !jobTitulo.includes(searchTerm) && !descripcion.includes(searchTerm)
+      const isInvalidTitle = !jobTitulo.includes(titulo.toLowerCase())
+      const isInvalidLevel = jobLevel !== level.toLowerCase()
+      const isInvalidTechnology = !tecnologias.includes(technology.toLowerCase())
+
+      if(isInvalidText || isInvalidTitle || isInvalidLevel || isInvalidTechnology) return false
+      return true
+
+      /* if (texto) {
         if (!jobTitulo.includes(searchTerm) && !descripcion.includes(searchTerm)) {
           return false
         }
-      }
+      } */
 
      
-      if (titulo) {
+      /* if (titulo) {
         if (!jobTitulo.includes(titulo.toLowerCase())) {
           return false
         }
-      }
+      } */
 
 
-      if (level) {
+      /* if (level) {
         if (jobLevel !== level.toLowerCase()) {
           return false
         }
-      }
+      } */
 
 
-      if (technology) {
+      /* if (technology) {
         if (!tecnologias.includes(technology.toLowerCase())) {
           return false
         }
-      }
-
-      return true
+      } */
     })
 
     const limitNumber = Number(limit)
@@ -59,20 +69,21 @@ export class JobModel {
     return job
   }
 
-  static async create({titulo, empresa, ubicacion, data}){
+  static async create({titulo, empresa, ubicacion, data, ...props}){
     const newJob = {
-    id: crypto.randomUUID(),
-    titulo, 
-    empresa, 
-    ubicacion,
-    data
-  }
-
-    jobs.push(newJob)
-
-    return(newJob)
-
+      ...props, // <- Por si queremos agregar `content`, etc.
+      id: crypto.randomUUID(),
+      titulo, 
+      empresa, 
+      ubicacion,
+      data
     }
+
+      jobs.push(newJob)
+
+      return(newJob)
+
+  }
 
 
 
