@@ -4,15 +4,15 @@ export class JobModel {
   static async getAll({ text, technology, type, level, limit, offset }) {
 
     const filteredJobs = jobs.filter(job => {
-
-      const normalizeTech = () => text.toLowerCase()
+    
+      const normalizeText = text?.toLowerCase()  
 
       const matchText = text
-        ? job.titulo.toLowerCase().includes(normalizeTech)
-        || job.descripcion.toLowerCase().includes(normalizeTech)
+        ? job.titulo.toLowerCase().includes(normalizeText)
+        || job.descripcion.toLowerCase().includes(normalizeText)
         : true
 
-      const matchTech = technology ? (job.data.technology.includes(technology)) : true
+      const matchTech = technology ? job.data.technology.map(t =>t.toLowerCase()).includes(technology.toLowerCase()) : true
       const matchType = type ? (job.data.modalidad === type) : true
       const matchLevel = level ? (job.data.nivel === level) : true
 

@@ -12,11 +12,14 @@ app.use(corsMiddleware())
 app.use(express.json())
 
 app.use('/jobs', jobsRouter)
-
+/*
 if (!process.env.NODE_ENV) {
   app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`)
   })
 }
-
+*/
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en http://localhost:${PORT}`)
+})
 export default app

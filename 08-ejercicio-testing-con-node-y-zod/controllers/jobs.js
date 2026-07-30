@@ -16,6 +16,10 @@ export class JobController {
         const { id } = req.params
 
         const {status, job} = await JobModel.getId(id)
+
+        if(!job){
+            return res.status(400).json({error:'Job not found'})
+        }
         
         return res.status(status).json(job)
     }
@@ -26,7 +30,7 @@ export class JobController {
 
         const {status, newJob} = await JobModel.create({ titulo, empresa, ubicacion, descripcion, data })
         
-        return res.status(status).json(newJob)
+        return res.status(status).json({ newJob })
     }
 
     static async update(req, res){
