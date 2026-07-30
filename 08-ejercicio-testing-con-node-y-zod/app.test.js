@@ -8,8 +8,8 @@
  * - Verificar validaciones con Zod
  * - Comprobar códigos de estado HTTP correctos
  */
-import {test, describe, before, after} from 'node:test'
 import assert from 'node:assert'
+import { afterEach, beforeEach, describe, test } from 'node:test'
 import app from './app.js'
 
 let server 
@@ -17,7 +17,8 @@ const PORT = 3456 // se hace en un puerto que no utilizamos para evitar conflict
 const BASE_URL = `http://localhost:${PORT}`
 
 //antes de todos los test se ejecuta para levantar el servidor 
-before(async () => {
+// MADEVAL: La idea es que todos los tests sean independientes entre sí, para lograr esto, lo mejor es levantar y cerrar el servidor para cada tests. De esta manera, los tests no pueden interferir en los otros. Imagina que eliminamos un job en un test y luego en otro verificamos que existe. Si mantenemos el servidor compartido para ambos, lo más probable es que se rompa, porque están consultando datos modificados.
+beforeEach(async () => {
   return new Promise((resolve, reject) => {
     server = app.listen(PORT, ()=> resolve())
     server.on('error', reject)
@@ -26,7 +27,7 @@ before(async () => {
   })
 
 // después de todos los test, se ejecuta una vez, para cerrar el servidor
-after(async () => {
+afterEach(async () => {
     return new Promise((resolve, reject) => {
         server.close((err) => {
             if (err) return reject(err)
@@ -35,56 +36,73 @@ after(async () => {
     })
 })
 
+/* Cuando tenemos funciones que se repiten mucho en cada test, lo mejor es unificarlo en una sola función */
+const handleGetResponseAndCheckStatus = async (path = '/', status = 200) => {
+    // 1. El desarrollador puede pasar el path con `/` al inicio o no, así que consideramos ambas opciones
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`
+
+    // 2. Hacemos el fetch y verificamos status
+    const res = await fetch(`${BASE_URL}${normalizedPath}`)
+    assert.strictEqual(res.status, status)
+
+    // 3. Devolvemos el JSON
+    const json = await res.json()
+    return json
+}
+
 describe('GET/jobs', () => {
     test('debe responder con 200 y un array de trabajos', async ()=> {
-        const response = await fetch(`${BASE_URL}/jobs`)
-        assert.strictEqual(response.status, 200)
-
-        const json = await response.json()
+        const json = await handleGetResponseAndCheckStatus('/jobs', 200)
         assert.ok(Array.isArray(json.data), 'La respuesta debe ser un array')
     })
      
     test('debe filtrar por trabajos por tecnologia', async () =>{
         const tech = 'react'
-        const response = await fetch(`${BASE_URL}/jobs?technology=${tech}`)
-        assert.strictEqual(response.status, 200)
+        const json = await handleGetResponseAndCheckStatus(`/jobs?technology=${tech}`, 200)
 
-        const json = await response.json()
-        console.log(json)
         assert.ok(
             json.data.every(job => job.data.technology.includes(tech)),
-            `Todos los trabajos deben incluir la tecnologia${tech}`
+            `Todos los trabajos deben incluir la tecnologia: ${tech}`
         )
         
     })
 
-    test('Debe respetar el límite de resultados'), async () =>{
+    test('Debe respetar el límite de resultados', async () => {
         const limit = 2
-        const response = await fetch(`${BASE_URL}/jobs=limit=${limit}`)
-        assert.strictEqual(response.status, 200)
-
-        const json = await response.json()
+        const json = await handleGetResponseAndCheckStatus(`/jobs?limit=${limit}`, 200)
 
         assert.strictEqual(json.limit, limit)
         assert.strictEqual(json.data.length, limit)
-    }
+    })
 
-    test ('Debe aplicar offset correctamente busca Analista de datos'), async () => {
+    test('Debe aplicar offset correctamente busca Analista de datos', async () => {
         const offset = 1
-        const response = await fetch(`${BASE_URL}/jobs=offset=${offset}`)
-        assert.strictEqual(response.status, 200)
+        const json = await handleGetResponseAndCheckStatus(`/jobs?offset=${offset}`, 200)
 
-        const json = await response.json()
         const firstJob = json.data[0]
         assert.strictEqual( firstJob.id,'d35b2c89-5d60-4f26-b19a-6cfb2f1a0f57' )
-    }
+    })
 
 })
 
+/* Como hicimos un handle para el GET, podemos hacer uno para el post */
+const handlePostResponseAndCheckStatus = async ({ path = '/', body }, status = 201) => {
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`
+
+    const response = await fetch(`${BASE_URL}${normalizedPath}`, {
+        method: 'POST',
+        headers : {'Content-Type': 'application/json'},
+        body : JSON.stringify(body)
+    })
+
+    assert.strictEqual(response.status, status) 
+    const json = await response.json()
+
+    return json
+}
 
 describe('POST/jobs', () => {
     test('Añadir un trabajo nuevo con buen formato', async ()=> {
-       
         const newJob = {
             titulo: 'Junior Frontend con background de Diseño gráfico',
             empresa: 'Innova',
@@ -97,15 +115,10 @@ describe('POST/jobs', () => {
             }
         }
 
-        const response = await fetch(`${BASE_URL}/jobs`, {
-            method: 'POST',
-            headers : {'Content-Type': 'application/json'},
-            body : JSON.stringify(newJob)
+        const json = await handlePostResponseAndCheckStatus({
+            path: '/jobs',
+            body: newJob
         })
-        //Verificar status code 201
-        assert.strictEqual(response.status, 201) 
-        const json = await response.json()
-        console.log(json)
         
         //Verificar que el job devuelto tiene un id generado
         assert.ok(json.newJob.id,' este job tiene un id generado' ) // 
@@ -119,7 +132,7 @@ describe('POST/jobs', () => {
         assert.deepStrictEqual(json.newJob.data, newJob.data)
     })
 
-    test('Probar con titulo de menos de 3 caracteres'), async () =>{
+    test('Probar con titulo de menos de 3 caracteres', async () => {
         const newJob = {
             titulo: 'de',
             empresa: 'Innova',
@@ -131,17 +144,16 @@ describe('POST/jobs', () => {
                 nivel : 'junior'
             }
         }
-        const response = await fetch(`${BASE_URL}/jobs`,{
-            method:'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newJob)
-        })
-        assert.strictEqual(response.status,400)
-    }
 
-    test('Probar con titulo de más de 100 caracteres'), async () => {
+        await handlePostResponseAndCheckStatus({
+            path: '/jobs',
+            body: newJob
+        }, 400)
+    })
+
+    test('Probar con titulo de más de 100 caracteres', async () => {
         const newJob = {
-            titulo: 'e'.repeat(100),
+            titulo: 'e'.repeat(101),
             empresa: 'Innova',
             ubicacion: 'Espanya',
             descripcion: 'Buscamos un junior',
@@ -152,16 +164,13 @@ describe('POST/jobs', () => {
             }
         }
 
-        const response = await fetch(`${BASE_URL}/jobs`, {
-            method:'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newJob) 
-        })
+        await handlePostResponseAndCheckStatus({
+            path: '/jobs',
+            body: newJob
+        }, 400)
+    })
 
-        assert.strictEqual(response.status,400)
-    }
-
-    test('Probar sin campo titulo'), async () => {
+    test('Probar sin campo titulo', async () => {
         const newJob = {
             empresa: 'Innova',
             ubicacion: 'Espanya',
@@ -173,16 +182,13 @@ describe('POST/jobs', () => {
             }
         }
 
-        const response = await fetch(`${BASE_URL}/jobs`, {
-            method:'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newJob) 
-        })
+        await handlePostResponseAndCheckStatus({
+            path: '/jobs',
+            body: newJob
+        }, 400)
+    })
 
-        assert.strictEqual(response.status, 400)
-    }
-
-    test('Probar con titulo que no sea string '), async () => {
+    test('Probar con titulo que no sea string', async () => {
          const newJob = {
             titulo: 6666666,
             empresa: 'Innova',
@@ -195,16 +201,13 @@ describe('POST/jobs', () => {
             }
         }
 
-        const response = await fetch(`${BASE_URL}/jobs`, {
-            method:'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newJob) 
-        })
+        await handlePostResponseAndCheckStatus({
+            path: '/jobs',
+            body: newJob
+        }, 400)
+    })
 
-        assert.strictEqual(response.status, 400)
-    }
-
-    test('Probar sin campo descripcion'), async () => {
+    test('Probar sin campo descripcion', async () => {
         const newJob = {
             titulo: 'Backend',
             empresa: 'Innova',
@@ -216,41 +219,34 @@ describe('POST/jobs', () => {
             }
         }
 
-        const response = await fetch(`${BASE_URL}/jobs`, {
-            method:'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newJob) 
-        })
-        const json = await response.json()
-        console.log(json)
-        assert.strictEqual(response.status,201)
-    }
+        await handlePostResponseAndCheckStatus({
+            path: '/jobs',
+            body: newJob
+        }, 201)
+    })
 })
 
 describe('GET/jobs/:id', () => {
-    test('Devolver el trabajo con ID especificado'), async () => {
-        const validId = 'd35b2c89-5d60-4f26-b19a-6cfb2f1a0f57' 
-        const response = await fetch(`${BASE_URL}/jobs/${validId}`)
+    test('Devolver el trabajo con ID especificado', async () => {
+        // Para no hardcodear el ID, podemos obtener uno real y usarlo
+        // const validId = 'd35b2c89-5d60-4f26-b19a-6cfb2f1a0f57'
+        const firstJson = await handleGetResponseAndCheckStatus('/jobs')
+        const randomId = firstJson.data[Math.floor(Math.random() * firstJson.total)]
 
-        assert.strictEqual(response.status, 200)
+        const job = await handleGetResponseAndCheckStatus(`/jobs/${randomId.id}`)
+        assert.strictEqual(job.id, randomId.id)
+    })
 
-        assert.strictEqual(job.id,validId)
-    }
-
-    test('Debe enviar 404 cuando el ID no existe'), async() =>{
+    test('Debe enviar 404 cuando el ID no existe', async () => {
         const invalidID ='6660000000'
-        const response = await fetch(`${BASE_URL}/jobs/${invalidID}`)
-        assert.strictEqual(response.status,404)
-
-        const json = await response.json()
-        console.log(json)
+        const json = await handleGetResponseAndCheckStatus(`/jobs/${invalidID}`, 404)
         assert.ok(json.error)
-    }
+    })
 
 })
 
 describe('PUT/jobs/:id', () => {
-    test('Debe recibir 204 y actualizar el trabajo'), async()=>{
+    test('Debe recibir 204 y actualizar el trabajo', async () => {
         const vId= 'bb8f2a99-6a20-4f9e-912a-16f54a49b8c3'// Especialista en Ciberseguridad 
 
         const updatedJob ={
@@ -278,9 +274,6 @@ describe('PUT/jobs/:id', () => {
         
         const jobData = await getResp.json()
 
-        const json= await response.json()
-        console.log(json)
-
         assert.strictEqual(jobData.titulo, updatedJob.titulo)
         assert.strictEqual(jobData.empresa, updatedJob.empresa)
         assert.strictEqual(jobData.ubicacion, updatedJob.ubicacion)
@@ -289,9 +282,9 @@ describe('PUT/jobs/:id', () => {
         assert.deepStrictEqual(jobData.data.technology, updatedJob.data.technology)
         assert.strictEqual(jobData.data.modalidad, updatedJob.data.modalidad)
         assert.strictEqual(jobData.data.nivel,updatedJob.data.nivel)
-        }
+    })
 
-        test('Debe devolver 404 cuando el ID no existe', async () => {
+    test('Debe devolver 404 cuando el ID no existe', async () => {
         const invalidId = 'id-inexistente-123'
 
         const updatedJob = {
@@ -341,7 +334,7 @@ describe('PUT/jobs/:id', () => {
 
         })
 
-        test('Debe devolver 404 cuando el ID no existe (en PATCH)'), async () =>{
+        test('Debe devolver 404 cuando el ID no existe (en PATCH)', async () => {
             const invId = 'id-inexistente-2555'
 
             const updatedJob = {
@@ -355,7 +348,7 @@ describe('PUT/jobs/:id', () => {
                 body : JSON.stringify(updatedJob)
             })
             assert.strictEqual(response.status, 404)
-        }
+        })
 
     })
         
