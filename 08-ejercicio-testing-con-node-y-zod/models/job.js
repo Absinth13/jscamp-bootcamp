@@ -1,5 +1,6 @@
 import jobs from '../jobs.json' with {type: 'json'}
 
+
 export class JobModel {
   static async getAll({ text, technology, type, level, limit, offset }) {
 
@@ -67,7 +68,8 @@ export class JobModel {
 
     const output = {
       status: 204,
-      error: null
+      error: null,
+      
     }
 
     const errorStatus = 404
@@ -89,7 +91,7 @@ export class JobModel {
       return output
     }
 
-    jobs[jobIndex] = { ...sentJob, id }
+    Object.assign(jobs[jobIndex], sentJob)
 
     return output
   }

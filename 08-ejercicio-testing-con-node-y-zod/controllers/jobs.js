@@ -12,7 +12,8 @@ export class JobController {
     }
 
     static async getId(req, res){
-
+        console.log("ID recibido:", req.params.id)
+     
         const { id } = req.params
 
         const {status, job} = await JobModel.getId(id)
@@ -37,14 +38,18 @@ export class JobController {
 
         const { id } = req.params
         const sentJob = req.body
+        
 
         const { status, error } = await JobModel.update({ id, sentJob })
         
-        return error
-            ? res.status(status).json(error)
-            : res.status(status).send()
-    }
+        if (error) {
+        return res.status(status).json({ error })
+         }
 
+         return res.status(status).json({ message: 'Job updated successfully' }) 
+         }
+    
+    
     static async partialUpdate(req, res){
         const { id } = req.params
         const sentJob = req.body

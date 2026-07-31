@@ -245,35 +245,48 @@ describe('GET/jobs/:id', () => {
 
 })
 
+/* Handle para PUT*/
+const handlePutResponseAndCheckStatus = async ({ path = '/', body }, status = 204) => {
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`
+
+    const response = await fetch(`${BASE_URL}${normalizedPath}`, {
+        method: 'PUT',
+        headers : {'Content-Type': 'application/json'},
+        body : JSON.stringify(body)
+    })
+
+    assert.strictEqual(response.status, status) 
+    return response 
+}
+
 describe('PUT/jobs/:id', () => {
     test('Debe recibir 204 y actualizar el trabajo', async () => {
-        const vId= 'bb8f2a99-6a20-4f9e-912a-16f54a49b8c3'// Especialista en Ciberseguridad 
+        const vId = 'f62d8a34-923a-4ac2-9b0b-14e0ac2f5405'
 
-        const updatedJob ={
-           titulo: 'Nuevo Titulo',
+        const updatedJob = {
+            titulo: 'Nuevo Titulo',
             empresa: 'Nueva Empresa',
             ubicacion: 'Nueva Ubicación',
             descripcion: 'Nueva descripción',
-            data : {
-                technology : ['nuevo', 'nuevo'],
-                modalidad : 'remoto',
-                nivel : 'junior'
+            data: {
+                technology: ['nuevo', 'nuevo'],
+                modalidad: 'remoto',
+                nivel: 'junior'
             }
         }
 
-        const response = await fetch(`${BASE_URL}/jobs/${vId}`, {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(updatedJob)
-        })
-        
-        assert.strictEqual(response.status,204)
-        //Hacer un GET del mismo job y verificar que se actualizó
-        const getResp = await fetch(`${BASE_URL}/jobs/${vId}`)
-        assert.strictEqual(getResp.status,200)
-        
-        const jobData = await getResp.json()
+        // PUT
+        const putResp = await handlePutResponseAndCheckStatus({
+            path: `/jobs/${vId}`,
+            body: updatedJob
+        }, 204)
 
+        assert.strictEqual(putResp.status, 204)
+
+        // GET para verificar que se actualizó
+        const jobData = await handleGetResponseAndCheckStatus(`/jobs/${vId}`, 200)
+
+     
         assert.strictEqual(jobData.titulo, updatedJob.titulo)
         assert.strictEqual(jobData.empresa, updatedJob.empresa)
         assert.strictEqual(jobData.ubicacion, updatedJob.ubicacion)
@@ -281,7 +294,7 @@ describe('PUT/jobs/:id', () => {
 
         assert.deepStrictEqual(jobData.data.technology, updatedJob.data.technology)
         assert.strictEqual(jobData.data.modalidad, updatedJob.data.modalidad)
-        assert.strictEqual(jobData.data.nivel,updatedJob.data.nivel)
+        assert.strictEqual(jobData.data.nivel, updatedJob.data.nivel)
     })
 
     test('Debe devolver 404 cuando el ID no existe', async () => {
@@ -299,36 +312,47 @@ describe('PUT/jobs/:id', () => {
             }
         }
 
-        const response = await fetch(`${BASE_URL}/jobs/${invalidId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(updatedJob)
-        })
+        const response = await handlePutResponseAndCheckStatus({
+            path: `/jobs/${invalidId}`,
+            body: updatedJob
+        }, 404)
 
         assert.strictEqual(response.status, 404)
     })
+})
+
+/* Handle para PATCH*/
+    const handlePatchResponseAndCheckStatus = async ({ path = '/', body }, status = 204) => {
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`
+
+    const response = await fetch(`${BASE_URL}${normalizedPath}`, {
+        method: 'PATCH',
+        headers : {'Content-Type': 'application/json'},
+        body : JSON.stringify(body)
+    })
+
+    assert.strictEqual(response.status, status) 
+    return response 
+}
 
 
     describe('PATCH/jobs/:id',() =>{
         test('Debe recibir 204 y actualizar solo los campos enviados', async () => {
-            const validId = 'f62d8a34-923a-4ac2-9b0b-14e0ac2f5405' // Ingeniero de DevOps
+            const validId = 't1u6q7r0-5p29-1q60-s6t1-0x3o4p6q7s9t' 
 
             const updatedJob = {
                 titulo : 'Nuevo Títulooooo',
                 ubicacion: 'Nueva Ubicaciónnnnnnnn'
             }
 
-            const response = await fetch(`${BASE_URL}/jobs/${validId}`,{
-                method: 'PATCH',
-                headers: {'Content-Type' : 'application/json'},
-                body: JSON.stringify(updatedJob)
-            })
-            assert.strictEqual(response.status,204)
+            const patchResp = await handlePatchResponseAndCheckStatus({
+                path:`/jobs/${validId}`,
+                body: updatedJob
+            }, 204)
+            assert.strictEqual(patchResp.status, 204)
 
-            const getResponse = await fetch(`${BASE_URL}/jobs/${validId}`)
-            assert.strictEqual(getResponse.status,200)
+            const jobData = await handleGetResponseAndCheckStatus(`/jobs/${validId}`, 200)
 
-            const jobData = await getResponse.json()
             assert.strictEqual(jobData.titulo, updatedJob.titulo)
             assert.strictEqual(jobData.ubicacion, updatedJob.ubicacion)
 
@@ -342,30 +366,54 @@ describe('PUT/jobs/:id', () => {
                 ubicacion:'No valida'
             }
 
-            const response = await fetch(`${BASE_URL}/jobs/${invId}`, {
-                method: 'PATCH',
-                headers : {'Content-Type' : 'application/json'},
-                body : JSON.stringify(updatedJob)
-            })
+            const response = await handlePatchResponseAndCheckStatus({
+            path: `/jobs/${invId}`,
+            body: updatedJob
+            }, 404)
             assert.strictEqual(response.status, 404)
         })
 
     })
         
-})
+/* Handle para DELETE*/
+    const handleDeleteResponseAndCheckStatus = async ({ path = '/', body }, status = 204) => {
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`
+
+    const response = await fetch(`${BASE_URL}${normalizedPath}`, {
+        method: 'DELETE',
+        headers : {'Content-Type': 'application/json'},
+        body : JSON.stringify(body)
+    })
+
+    assert.strictEqual(response.status, status) 
+    return response 
+}
+
+/* Handle para status*/
+    const handleStatusOnly = async ({ path = '/', body }, status = 204) => {
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`
+
+    const res = await fetch(`${BASE_URL}${normalizedPath}`)
+
+    assert.strictEqual(res.status, status) 
+    return {status: res.status}
+}
+
+
 
 describe('DELETE/jobs/:id', () => {
     test('Debe recibir 204 y eliminar el trabajo', async () => {
-        const vaId = '7a4d1d8b-1e45-4d8c-9f1a-8c2f9a9121a4' // Desarrollador de Software Senior
-        const response = await fetch(`${BASE_URL}/jobs/${vaId}`, {
-            method: 'DELETE'
-        })
+        const vaId = '7a4d1d8b-1e45-4d8c-9f1a-8c2f9a9121a4' 
+        const delResp = await handleDeleteResponseAndCheckStatus({
+            path: `/jobs/${vaId}`,
+        }, 204)
 
-        assert.strictEqual(response.status, 204)
+        assert.strictEqual(delResp.status, 204)
 
        
-        const getResponse = await fetch(`${BASE_URL}/jobs/${vaId}`)
-        assert.strictEqual(getResponse.status, 404)
+        const getResp = await handleStatusOnly(`/jobs/${vaId}`, 404)
+        assert.strictEqual(getResp.status, 404)
     })
 })
+
 

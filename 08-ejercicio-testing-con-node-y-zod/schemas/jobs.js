@@ -23,7 +23,7 @@ const jobSchema = z.object({
         technology: z.array(z.string()),
         modalidad:z.string(),
         nivel:z.string(),
-    })
+    }).optional()
 })
 
 export function validateJob(input){
