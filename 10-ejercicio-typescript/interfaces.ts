@@ -1,4 +1,7 @@
 /* En este archivo deberás tipar las interfaces de los servicios de búsqueda y aplicación a empleo */
+import type { Job } from './objects'
+import type {ExperienceLevel , Technology, WorkMode, ApplicationStatus} from './types'
+//import type { AdvancedSearchOptions} from './optionals'
 
 import {
   filterByExperience,
@@ -10,6 +13,12 @@ import {
 // Interface para servicios de búsqueda
 export interface JobSearchService {
   /* Deberás definir los tipos de las funciones */
+  searchJobs(jobs: Job[], searchTerm: string ): Job[]
+  filterByExperience(jobs: Job[], level: ExperienceLevel): Job[]
+  filterByTechnology(jobs: Job[], tech: Technology): Job[]
+  filterByMinSalary(jobs: Job[], minSalary: number): Job[]
+  //advancedSearch(jobs: Job[], options: AdvancedSearchOptions): Job[];
+  
 }
 
 export const searchService: JobSearchService = {
@@ -17,10 +26,22 @@ export const searchService: JobSearchService = {
   filterByExperience,
   filterByMinSalary,
   filterByTechnology,
+  
 }
 
 // Interface para aplicación a empleo
-export interface JobApplication {}
+export interface JobApplication {
+  id: string
+  jobId: string
+  candidatedId: string
+  status: ApplicationStatus 
+  appliedDate: Date
+  coverLetter?: string
+}
 
 // Interface que extiende Job con propiedades adicionales
-export interface DetailedJob {}
+export interface DetailedJob {
+  benefits: string[]
+  requirements: string[]
+  applicationDeadline?: Date
+}
