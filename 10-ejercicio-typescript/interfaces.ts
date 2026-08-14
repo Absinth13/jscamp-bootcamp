@@ -1,6 +1,6 @@
 /* En este archivo deberás tipar las interfaces de los servicios de búsqueda y aplicación a empleo */
 import type { Job } from './objects'
-import type {ExperienceLevel , Technology, WorkMode, ApplicationStatus} from './types'
+import type { ApplicationStatus, ExperienceLevel, Technology } from './types'
 //import type { AdvancedSearchOptions} from './optionals'
 
 import {
@@ -33,14 +33,14 @@ export const searchService: JobSearchService = {
 export interface JobApplication {
   id: string
   jobId: string
-  candidatedId: string
+  candidateId: string // Ojo que había una `d` de más
   status: ApplicationStatus 
   appliedDate: Date
   coverLetter?: string
 }
 
 // Interface que extiende Job con propiedades adicionales
-export interface DetailedJob {
+export interface DetailedJob extends Job { // Debe extender de Job
   benefits: string[]
   requirements: string[]
   applicationDeadline?: Date
