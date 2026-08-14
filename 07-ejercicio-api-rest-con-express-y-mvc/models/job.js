@@ -1,30 +1,53 @@
 
 /* Recuerda que el modelo SOLO debe manejar la lógica de los datos, en este caso nuestro JSON */
+
 import crypto from 'node:crypto'
-import { DEFAULTS } from '../config'
+import { DEFAULTS } from '../config.js'
 import jobs from '../jobs.json' with { type: 'json' }
 
 export class JobModel {
   // EN vez de valores hardcodeados, usaremos los que vienen de la constante global
-  static async getAll({ texto, titulo, level, limit = DEFAULTS.LIMIT_PAGINATION, technology, offset = DEFAULTS.LIMIT_OFFSET }) {
+ static async getAll({ texto, titulo, level, limit, technology, offset, type, ubicacion }) {
+
 
     const filteredJobs = jobs.filter(job => {
 
       const jobTitulo = job.titulo?.toLowerCase() ?? ''
       const descripcion = job.descripcion?.toLowerCase() ?? ''
-      const tecnologias = job.data?.technology ?? []
+      const tecnologias = Array.isArray(job.data?.technology)
+        ? job.data.technology
+        : []
       const jobLevel = job.data?.nivel?.toLowerCase() ?? ''
       const searchTerm = texto?.toLowerCase() ?? ''
+      const jobUbicacion = job.ubicacion?.toLowerCase() ?? ''
+      const jobType = job.data?.modalidad?.toLowerCase() ?? ''
+     
+
 
       // Podemos simplificar un poco esto, a ver que opinas:
       // De esta manera podemos agregar validaciones por separado
       const isInvalidText = !jobTitulo.includes(searchTerm) && !descripcion.includes(searchTerm)
-      const isInvalidTitle = !jobTitulo.includes(titulo.toLowerCase())
-      const isInvalidLevel = jobLevel !== level.toLowerCase()
-      const isInvalidTechnology = !tecnologias.includes(technology.toLowerCase())
+      const isInvalidTitle = titulo && !jobTitulo.includes(titulo.toLowerCase())
+      const isInvalidLevel = level && jobLevel !== level.toLowerCase()
+      const isInvalidTechnology = technology && !tecnologias.includes(technology.toLowerCase())
+      const isInvalidUbicacion = ubicacion && jobUbicacion !== ubicacion.toLowerCase()
+       const isInvalidType = type && jobType !== type.toLowerCase()
 
-      if(isInvalidText || isInvalidTitle || isInvalidLevel || isInvalidTechnology) return false
-      return true
+      if (
+            isInvalidText ||
+            isInvalidTitle ||
+            isInvalidLevel ||
+            isInvalidTechnology ||
+            isInvalidType ||
+            isInvalidUbicacion
+          ) {
+            return false
+          }
+
+          return true
+
+
+
 
       /* if (texto) {
         if (!jobTitulo.includes(searchTerm) && !descripcion.includes(searchTerm)) {

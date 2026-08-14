@@ -5,11 +5,17 @@ import { JobModel } from '../models/job.js'
 export class JobController {
     static async getAll(req, res){
         // Ahora se llama `texto`
-        const {texto: text, titulo, level, limit = DEFAULTS.LIMIT_PAGINATION, 
-        technology, offset = DEFAULTS.LIMIT_OFFSET} = req.query
+        const { texto, titulo, level, type, ubicacion, page = 1, limit = DEFAULTS.LIMIT_PAGINATION, 
+        technology} = req.query
 
-        const {data, total} = await JobModel.getAll({ text, titulo, level, limit, technology, offset})
-        return res.json({data, total, limit, offset})
+        const pageNum = parseInt(page)
+        const limitNum = parseInt(limit)
+
+        const offset = (pageNum - 1) * limitNum
+
+        const {data, total} = await JobModel.getAll({ texto, titulo, level, limit, technology, offset, type, ubicacion, limit: limitNum, offset })
+         res.set('Cache-Control', 'no-store')
+         return res.json({ data, total, limit: limitNum, offset, page: pageNum})
     }
 
     static async getId(req, res){

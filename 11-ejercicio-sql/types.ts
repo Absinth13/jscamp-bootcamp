@@ -44,9 +44,17 @@ export type UpdateJobDTO = Partial<CreateJobDTO>
 // ================================
 
 export interface JobFilters {
+<<<<<<< HEAD
   tech?: string
   modality?: JobData['modality']
   level?: JobData['level']
+=======
+  technology?: string
+  modality?: JobData['modality']
+  level?: JobData['level']
+  limit?: number
+  offset?: number
+>>>>>>> d728fd3 (recuperando todos los cambios del día y limpiando node_modules)
 }
 
 // ================================

@@ -11,6 +11,7 @@ const app = express()
 app.use(corsMiddleware())
 app.use(express.json())
 
+
 app.use('/jobs', jobsRouter)
 /*
 if (!process.env.NODE_ENV) {

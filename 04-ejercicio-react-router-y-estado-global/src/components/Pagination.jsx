@@ -40,7 +40,7 @@ export function Pagination({ currentPage = 1, totalPages = 10, onPageChange }) {
   }
 
   return (
-    <nav className={styles.pagination}>
+    <nav className={styles.pagination} data-testid="pagination">
       <a href={buildPageUrl(currentPage - 1)} style={stylePrevButton} onClick={handlePrevClick}>
         <svg
           width="16"

@@ -10,7 +10,7 @@ export default function HomePage () {
     const searchTerm = formData.get('search')
     
     const url = searchTerm
-      ? `/search?text=${encodeURIComponent(searchTerm)}`
+      ? `/search?texto=${encodeURIComponent(searchTerm)}`
       : '/search'
 
     navigateTo(url)
@@ -38,9 +38,11 @@ export default function HomePage () {
             <input
               name="search"
               required
-              type="text"
+              type="search" // originalmente era "text"
+              aria-label="Buscar empleos"
               placeholder="Buscar empleos por título, habilidad o empresa"
             />
+              
 
             <button type="submit">Buscar</button>
           </div>

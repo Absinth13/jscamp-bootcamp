@@ -17,13 +17,12 @@ const useFilters = () => {
       experienceLevel: searchParams.get('level') || ''
     }
   })
-  const [textToFilter, setTextToFilter] = useState(() => searchParams.get('text') || '')
+  const [textToFilter, setTextToFilter] = useState(() => searchParams.get('texto') || '')
   
 
   const [currentPage, setCurrentPage] = useState(() => {
-   
-    const page = Number(searchParams.get('page'))
-    return Number.isNaN(page) ? 1 : page
+  const page = Number(searchParams.get('page'))
+  return Number.isNaN(page) || page < 1 ? 1 : page
   })
 
   const [jobs, setJobs] = useState([])
@@ -32,8 +31,9 @@ const useFilters = () => {
 
  
 
-
+const [isInitialLoad, setIsInitialLoad] = useState(true)
  useEffect(() =>{
+   if (!currentPage || currentPage < 1) return 
      async function fetchJobs(){
        try {
          setLoading(true)
@@ -43,14 +43,18 @@ const useFilters = () => {
          if (value) params.append(key, value)
         }
  
-        appendParamIfExist('text', textToFilter)
+        appendParamIfExist('texto', textToFilter)
         appendParamIfExist('technology', filters.technology)
         appendParamIfExist('type', filters.location)
         appendParamIfExist('level', filters.experienceLevel)
+
+        params.append('page', currentPage)
+        params.append('limit', RESULTS_PER_PAGE)
      
         const queryParams = params.toString()
       
-        const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`)
+        //const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`)
+        const response = await fetch(`http://localhost:1234/jobs?${queryParams}`)
         const json = await response.json()
 
         setJobs(json.data)
@@ -65,21 +69,23 @@ const useFilters = () => {
     fetchJobs()
   }, [filters, currentPage, textToFilter])
 
+  
   useEffect(() => {
-    setSearchParams((params)=> {
+  const params = new URLSearchParams()
 
-    if (textToFilter) params.set('text', textToFilter)
-    if (filters.technology) params.set('technology', filters.technology)
-    if (filters.location) params.set('type', filters.location)
-    if (filters.experienceLevel) params.set('level', filters.experienceLevel)
+  
+  if (textToFilter.trim() !== '') {
+    params.set('texto', textToFilter)
+  }
 
-    if (currentPage > 1) params.set('page', currentPage)
+  if (filters.technology) params.set('technology', filters.technology)
+  if (filters.location) params.set('type', filters.location)
+  if (filters.experienceLevel) params.set('level', filters.experienceLevel)
+  if (currentPage > 1) params.set('page', currentPage)
 
-    return params
-    })
-    
+  setSearchParams(Object.fromEntries(params))
+}, [filters, currentPage, textToFilter])
 
-  }, [filters, currentPage, textToFilter, setSearchParams])
 
   const totalPages = Math.ceil(total / RESULTS_PER_PAGE)
 
