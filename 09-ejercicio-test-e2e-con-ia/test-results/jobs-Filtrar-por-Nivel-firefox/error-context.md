@@ -1,0 +1,118 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "DevJobs" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - heading "DevJobs" [level=1] [ref=e5]:
+        - img [ref=e6]
+        - text: DevJobs
+    - navigation [ref=e9]:
+      - link "Inicio" [ref=e10] [cursor=pointer]:
+        - /url: /
+      - link "Empleos":
+        - /url: /search
+    - button "Iniciar Sesión" [ref=e11] [cursor=pointer]
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - heading "Encuentra tu próximo trabajo" [level=1] [ref=e14]
+      - paragraph [ref=e15]: Explora miles de oportunidades en el sector tecnológico.
+      - search [ref=e16]:
+        - generic [ref=e17]:
+          - img [ref=e18]
+          - textbox "Buscar trabajos, empresas o habilidades" [ref=e22]
+          - button "✖︎" [ref=e23] [cursor=pointer]
+        - generic [ref=e24]:
+          - combobox [ref=e25] [cursor=pointer]:
+            - option "Tecnología" [selected]
+            - text: Tecnologías populares
+            - option "JavaScript"
+            - option "Python"
+            - option "React"
+            - option "Node.js"
+            - option "Java"
+            - option "C#"
+            - option "C"
+            - option "C++"
+            - option "Ruby"
+            - option "PHP"
+          - combobox [ref=e26] [cursor=pointer]:
+            - option "Ubicación" [selected]
+            - option "Remoto"
+            - option "Ciudad de México"
+            - option "Guadalajara"
+            - option "Monterrey"
+            - option "Barcelona"
+          - combobox [ref=e27] [cursor=pointer]:
+            - option "Nivel de experiencia"
+            - option "Junior"
+            - option "Mid-level"
+            - option "Senior" [selected]
+            - option "Lead"
+    - generic [ref=e28]:
+      - heading "Resultados de búsqueda" [level=2] [ref=e29]
+      - generic [ref=e30]:
+        - article [ref=e31]:
+          - generic [ref=e32]:
+            - heading "Desarrollador de Software Senior" [level=3] [ref=e33]:
+              - link "Desarrollador de Software Senior" [ref=e34] [cursor=pointer]:
+                - /url: /jobs/7a4d1d8b-1e45-4d8c-9f1a-8c2f9a9121a4
+            - generic [ref=e35]: Tech Solutions Inc. | Remoto
+            - paragraph [ref=e36]: Buscamos un ingeniero de software con experiencia en desarrollo web y conocimientos en JavaScript, React y Node.js. El candidato ideal debe ser capaz de trabajar en equipo y tener buenas habilidades de comunicación.
+          - generic [ref=e37]:
+            - link "Ver detalles" [ref=e38] [cursor=pointer]:
+              - /url: /jobs/7a4d1d8b-1e45-4d8c-9f1a-8c2f9a9121a4
+            - button "Aplicar" [disabled]
+            - button "Agregar a favoritos" [disabled]: 🤍
+        - article [ref=e39]:
+          - generic [ref=e40]:
+            - heading "Product Manager" [level=3] [ref=e41]:
+              - link "Product Manager" [ref=e42] [cursor=pointer]:
+                - /url: /jobs/fe7b2c54-4f47-4e2b-9e87-2b5413a6b24f
+            - generic [ref=e43]: NextGen Technologies | Madrid
+            - paragraph [ref=e44]: Estamos buscando un Product Manager con experiencia en la definición y lanzamiento de productos digitales. Se requiere capacidad analítica, liderazgo y conocimiento en metodologías ágiles.
+          - generic [ref=e45]:
+            - link "Ver detalles" [ref=e46] [cursor=pointer]:
+              - /url: /jobs/fe7b2c54-4f47-4e2b-9e87-2b5413a6b24f
+            - button "Aplicar" [disabled]
+            - button "Agregar a favoritos" [disabled]: 🤍
+        - article [ref=e47]:
+          - generic [ref=e48]:
+            - heading "Ingeniero de Machine Learning" [level=3] [ref=e49]:
+              - link "Ingeniero de Machine Learning" [ref=e50] [cursor=pointer]:
+                - /url: /jobs/b65a3c9f-b174-4d86-b8a2-9cf9b1e13a22
+            - generic [ref=e51]: AI Labs | Remoto
+            - paragraph [ref=e52]: Buscamos un ingeniero de machine learning con experiencia en modelos de predicción y procesamiento de datos. Se valorará conocimiento en TensorFlow, PyTorch y MLOps.
+          - generic [ref=e53]:
+            - link "Ver detalles" [ref=e54] [cursor=pointer]:
+              - /url: /jobs/b65a3c9f-b174-4d86-b8a2-9cf9b1e13a22
+            - button "Aplicar" [disabled]
+            - button "Agregar a favoritos" [disabled]: 🤍
+        - article [ref=e55]:
+          - generic [ref=e56]:
+            - heading "Full Stack Developer" [level=3] [ref=e57]:
+              - link "Full Stack Developer" [ref=e58] [cursor=pointer]:
+                - /url: /jobs/b3c8e9f2-7d41-4e92-a8b3-2f5c6d8e9a1b
+            - generic [ref=e59]: WebDev Masters | Remoto
+            - paragraph [ref=e60]: Se busca desarrollador full stack con dominio de tecnologías frontend y backend. Experiencia con React, Node.js, PostgreSQL y Docker es esencial.
+          - generic [ref=e61]:
+            - link "Ver detalles" [ref=e62] [cursor=pointer]:
+              - /url: /jobs/b3c8e9f2-7d41-4e92-a8b3-2f5c6d8e9a1b
+            - button "Aplicar" [disabled]
+            - button "Agregar a favoritos" [disabled]: 🤍
+      - navigation [ref=e63]:
+        - link:
+          - /url: /search?page=0
+          - img
+        - link "1":
+          - /url: /search?page=1
+        - link "2" [ref=e64] [cursor=pointer]:
+          - /url: /search?page=2
+        - link "3" [ref=e65] [cursor=pointer]:
+          - /url: /search?page=3
+        - link [ref=e66] [cursor=pointer]:
+          - /url: /search?page=2
+          - img [ref=e67]
+  - contentinfo [ref=e70]: © 2025 DevJobs. Todos los derechos reservados.
+```

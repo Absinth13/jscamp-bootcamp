@@ -132,11 +132,11 @@ export function SearchFormSection({ onTextFilter, onSearch, initialText }) {
 
           <select name={idLocation} id="filter-location" data-testid="filter-location">
             <option value="">Ubicación</option>
-            <option value="remoto">Remoto</option>
-            <option value="cdmx">Ciudad de México</option>
-            <option value="guadalajara">Guadalajara</option>
-            <option value="monterrey">Monterrey</option>
-            <option value="barcelona">Barcelona</option>
+            <option value="Remoto">Remoto</option>
+            <option value="Ciudad de México">Ciudad de México</option>
+            <option value="Guadalajara">Guadalajara</option>
+            <option value="Monterrey">Monterrey</option>
+            <option value="Barcelona">Barcelona</option>
           </select>
 
           <select name={idExperienceLevel} id="filter-experience-level" data-testid="filter-experience-level">

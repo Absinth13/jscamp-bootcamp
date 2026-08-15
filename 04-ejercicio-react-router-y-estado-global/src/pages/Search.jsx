@@ -13,27 +13,27 @@ const useFilters = () => {
     
     return {
       technology: searchParams.get('technology') || '',
-      location: searchParams.get('type') || '',
+      location: searchParams.get('ubicacion') || '',
       experienceLevel: searchParams.get('level') || ''
     }
   })
   const [textToFilter, setTextToFilter] = useState(() => searchParams.get('texto') || '')
   
 
-  const [currentPage, setCurrentPage] = useState(() => {
-  const page = Number(searchParams.get('page'))
-  return Number.isNaN(page) || page < 1 ? 1 : page
-  })
+  const [currentPage, setCurrentPage] = useState(1)
+  useEffect(() => {
+  const page = Number(searchParams.get('page')) || 1
+  setCurrentPage(page)
+}, [searchParams])
 
   const [jobs, setJobs] = useState([])
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true)
 
- 
+   const pageParam = currentPage
 
-const [isInitialLoad, setIsInitialLoad] = useState(true)
  useEffect(() =>{
-   if (!currentPage || currentPage < 1) return 
+   
      async function fetchJobs(){
        try {
          setLoading(true)
@@ -45,7 +45,7 @@ const [isInitialLoad, setIsInitialLoad] = useState(true)
  
         appendParamIfExist('texto', textToFilter)
         appendParamIfExist('technology', filters.technology)
-        appendParamIfExist('type', filters.location)
+        appendParamIfExist('ubicacion', filters.location)
         appendParamIfExist('level', filters.experienceLevel)
 
         params.append('page', currentPage)
@@ -67,24 +67,7 @@ const [isInitialLoad, setIsInitialLoad] = useState(true)
     }
 
     fetchJobs()
-  }, [filters, currentPage, textToFilter])
-
-  
-  useEffect(() => {
-  const params = new URLSearchParams()
-
-  
-  if (textToFilter.trim() !== '') {
-    params.set('texto', textToFilter)
-  }
-
-  if (filters.technology) params.set('technology', filters.technology)
-  if (filters.location) params.set('type', filters.location)
-  if (filters.experienceLevel) params.set('level', filters.experienceLevel)
-  if (currentPage > 1) params.set('page', currentPage)
-
-  setSearchParams(Object.fromEntries(params))
-}, [filters, currentPage, textToFilter])
+  }, [filters, textToFilter, currentPage])
 
 
   const totalPages = Math.ceil(total / RESULTS_PER_PAGE)

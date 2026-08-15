@@ -13,7 +13,8 @@ export class JobController {
 
         const offset = (pageNum - 1) * limitNum
 
-        const {data, total} = await JobModel.getAll({ texto, titulo, level, limit, technology, offset, type, ubicacion, limit: limitNum, offset })
+        const {data, total} = await JobModel.getAll({ texto, titulo, level, technology, type, ubicacion, limit: limitNum, page: pageNum })
+
          res.set('Cache-Control', 'no-store')
          return res.json({ data, total, limit: limitNum, offset, page: pageNum})
     }

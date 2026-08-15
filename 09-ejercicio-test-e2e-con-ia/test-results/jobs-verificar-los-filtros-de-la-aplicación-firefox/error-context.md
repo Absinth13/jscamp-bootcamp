@@ -1,0 +1,130 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "DevJobs" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - heading "DevJobs" [level=1] [ref=e5]:
+        - img [ref=e6]
+        - text: DevJobs
+    - navigation [ref=e9]:
+      - link "Inicio" [ref=e10] [cursor=pointer]:
+        - /url: /
+      - link "Empleos":
+        - /url: /search
+    - button "Iniciar Sesión" [ref=e11] [cursor=pointer]
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - heading "Encuentra tu próximo trabajo" [level=1] [ref=e14]
+      - paragraph [ref=e15]: Explora miles de oportunidades en el sector tecnológico.
+      - search [ref=e16]:
+        - generic [ref=e17]:
+          - img [ref=e18]
+          - textbox "Buscar trabajos, empresas o habilidades" [ref=e22]
+          - button "✖︎" [ref=e23] [cursor=pointer]
+        - generic [ref=e24]:
+          - combobox [ref=e25] [cursor=pointer]:
+            - option "Tecnología" [selected]
+            - text: Tecnologías populares
+            - option "JavaScript"
+            - option "Python"
+            - option "React"
+            - option "Node.js"
+            - option "Java"
+            - option "C#"
+            - option "C"
+            - option "C++"
+            - option "Ruby"
+            - option "PHP"
+          - combobox [ref=e26] [cursor=pointer]:
+            - option "Ubicación" [selected]
+            - option "Remoto"
+            - option "Ciudad de México"
+            - option "Guadalajara"
+            - option "Monterrey"
+            - option "Barcelona"
+          - combobox [ref=e27] [cursor=pointer]:
+            - option "Nivel de experiencia" [selected]
+            - option "Junior"
+            - option "Mid-level"
+            - option "Senior"
+            - option "Lead"
+    - generic [ref=e28]:
+      - heading "Resultados de búsqueda" [level=2] [ref=e29]
+      - generic [ref=e30]:
+        - article [ref=e31]:
+          - generic [ref=e32]:
+            - heading "Desarrollador de Software Senior" [level=3] [ref=e33]:
+              - link "Desarrollador de Software Senior" [ref=e34] [cursor=pointer]:
+                - /url: /jobs/7a4d1d8b-1e45-4d8c-9f1a-8c2f9a9121a4
+            - generic [ref=e35]: Tech Solutions Inc. | Remoto
+            - paragraph [ref=e36]: Buscamos un ingeniero de software con experiencia en desarrollo web y conocimientos en JavaScript, React y Node.js. El candidato ideal debe ser capaz de trabajar en equipo y tener buenas habilidades de comunicación.
+          - generic [ref=e37]:
+            - link "Ver detalles" [ref=e38] [cursor=pointer]:
+              - /url: /jobs/7a4d1d8b-1e45-4d8c-9f1a-8c2f9a9121a4
+            - button "Aplicar" [disabled]
+            - button "Agregar a favoritos" [disabled]: 🤍
+        - article [ref=e39]:
+          - generic [ref=e40]:
+            - heading "Analista de Datos" [level=3] [ref=e41]:
+              - link "Analista de Datos" [ref=e42] [cursor=pointer]:
+                - /url: /jobs/d35b2c89-5d60-4f26-b19a-6cfb2f1a0f57
+            - generic [ref=e43]: Data Driven Co. | Ciudad de México
+            - paragraph [ref=e44]: Estamos buscando un analista de datos con experiencia en el manejo de grandes conjuntos de datos y herramientas de visualización. Se requiere conocimiento en SQL, Python y R.
+          - generic [ref=e45]:
+            - link "Ver detalles" [ref=e46] [cursor=pointer]:
+              - /url: /jobs/d35b2c89-5d60-4f26-b19a-6cfb2f1a0f57
+            - button "Aplicar" [disabled]
+            - button "Agregar a favoritos" [disabled]: 🤍
+        - article [ref=e47]:
+          - generic [ref=e48]:
+            - heading "Desarrollador de Aplicaciones Móviles" [level=3] [ref=e49]:
+              - link "Desarrollador de Aplicaciones Móviles" [ref=e50] [cursor=pointer]:
+                - /url: /jobs/e31f9a92-61d7-4b7a-b3a2-91e8c1f40b2d
+            - generic [ref=e51]: Mobile Apps Ltd. | Guadalajara
+            - paragraph [ref=e52]: Buscamos un desarrollador de aplicaciones móviles con experiencia en iOS y/o Android. El candidato debe tener conocimientos en Swift, Kotlin y el desarrollo de interfaces de usuario.
+          - generic [ref=e53]:
+            - link "Ver detalles" [ref=e54] [cursor=pointer]:
+              - /url: /jobs/e31f9a92-61d7-4b7a-b3a2-91e8c1f40b2d
+            - button "Aplicar" [disabled]
+            - button "Agregar a favoritos" [disabled]: 🤍
+        - article [ref=e55]:
+          - generic [ref=e56]:
+            - heading "Ingeniero de DevOps" [level=3] [ref=e57]:
+              - link "Ingeniero de DevOps" [ref=e58] [cursor=pointer]:
+                - /url: /jobs/f62d8a34-923a-4ac2-9b0b-14e0ac2f5405
+            - generic [ref=e59]: Cloud Services SA | Remoto
+            - paragraph [ref=e60]: Estamos buscando un ingeniero de DevOps con experiencia en la gestión de infraestructuras en la nube, automatización de procesos y herramientas de integración continua. Se requiere conocimiento en AWS, Azure o GCP.
+          - generic [ref=e61]:
+            - link "Ver detalles" [ref=e62] [cursor=pointer]:
+              - /url: /jobs/f62d8a34-923a-4ac2-9b0b-14e0ac2f5405
+            - button "Aplicar" [disabled]
+            - button "Agregar a favoritos" [disabled]: 🤍
+      - navigation [ref=e63]:
+        - link:
+          - /url: /search?page=0
+          - img
+        - link "1":
+          - /url: /search?page=1
+        - link "2" [ref=e64] [cursor=pointer]:
+          - /url: /search?page=2
+        - link "3" [ref=e65] [cursor=pointer]:
+          - /url: /search?page=3
+        - link "4" [ref=e66] [cursor=pointer]:
+          - /url: /search?page=4
+        - link "5" [ref=e67] [cursor=pointer]:
+          - /url: /search?page=5
+        - link "6" [ref=e68] [cursor=pointer]:
+          - /url: /search?page=6
+        - link "7" [ref=e69] [cursor=pointer]:
+          - /url: /search?page=7
+        - link "8" [ref=e70] [cursor=pointer]:
+          - /url: /search?page=8
+        - link "9" [ref=e71] [cursor=pointer]:
+          - /url: /search?page=9
+        - link [ref=e72] [cursor=pointer]:
+          - /url: /search?page=2
+          - img [ref=e73]
+  - contentinfo [ref=e76]: © 2025 DevJobs. Todos los derechos reservados.
+```

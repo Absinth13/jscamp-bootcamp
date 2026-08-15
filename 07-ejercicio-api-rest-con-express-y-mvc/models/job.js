@@ -7,31 +7,52 @@ import jobs from '../jobs.json' with { type: 'json' }
 
 export class JobModel {
   // EN vez de valores hardcodeados, usaremos los que vienen de la constante global
- static async getAll({ texto, titulo, level, limit, technology, offset, type, ubicacion }) {
+ static async getAll({ texto, titulo, level, limit, technology, page, type, ubicacion }) {
 
 
     const filteredJobs = jobs.filter(job => {
+      const normalizeText = (text) => {
+      return text
+       ?.toLowerCase()
+       .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+       .trim()
+}
 
       const jobTitulo = job.titulo?.toLowerCase() ?? ''
       const descripcion = job.descripcion?.toLowerCase() ?? ''
       const tecnologias = Array.isArray(job.data?.technology)
-        ? job.data.technology
-        : []
+            ? job.data.technology.map(t => t.toLowerCase())
+            : []
       const jobLevel = job.data?.nivel?.toLowerCase() ?? ''
       const searchTerm = texto?.toLowerCase() ?? ''
-      const jobUbicacion = job.ubicacion?.toLowerCase() ?? ''
+      const jobUbicacion = normalizeText(job.ubicacion)
+      const ubicacionNormalized = normalizeText(ubicacion)
       const jobType = job.data?.modalidad?.toLowerCase() ?? ''
-     
+      
+      const normalizeType = (t) => {
+        if (!t) return null
 
+        const map = {
+          "remote": "remoto",
+          "full-time": "remoto",
+          "onsite": "presencial",
+          "hybrid": "híbrido"
+        }
 
+        return map[t.toLowerCase()] ?? t.toLowerCase()
+      }
+
+      const normalizedType = normalizeType(type)
+      
       // Podemos simplificar un poco esto, a ver que opinas:
       // De esta manera podemos agregar validaciones por separado
-      const isInvalidText = !jobTitulo.includes(searchTerm) && !descripcion.includes(searchTerm)
+      const isInvalidText = texto && !jobTitulo.includes(searchTerm) && !descripcion.includes(searchTerm)
       const isInvalidTitle = titulo && !jobTitulo.includes(titulo.toLowerCase())
       const isInvalidLevel = level && jobLevel !== level.toLowerCase()
       const isInvalidTechnology = technology && !tecnologias.includes(technology.toLowerCase())
-      const isInvalidUbicacion = ubicacion && jobUbicacion !== ubicacion.toLowerCase()
-       const isInvalidType = type && jobType !== type.toLowerCase()
+      const isInvalidUbicacion = ubicacion && jobUbicacion !== ubicacionNormalized
+      const isInvalidType = normalizedType && jobType !== normalizedType
 
       if (
             isInvalidText ||
@@ -46,7 +67,7 @@ export class JobModel {
 
           return true
 
-
+        
 
 
       /* if (texto) {
@@ -77,19 +98,19 @@ export class JobModel {
       } */
     })
 
-    const limitNumber = Number(limit)
-    const offsetNumber = Number(offset)
+    const pageNumber = Number(page) || 1
+    const limitNumber = Number(limit) || DEFAULTS.LIMIT_PAGINATION
+    const offsetNumber = (pageNumber - 1) * limitNumber
 
-    const paginatedJobs= filteredJobs.slice(offsetNumber, offsetNumber + limitNumber)
+    const paginatedJobs = filteredJobs.slice(offsetNumber, offsetNumber + limitNumber)
 
-    return {data:paginatedJobs, total: filteredJobs.length, limit:limitNumber, offset:offsetNumber }  
+    return {data:paginatedJobs, total: filteredJobs.length, limit:limitNumber, offset:offsetNumber, page: pageNumber}  
 
     
   }
 
-  static async getById(id){
-    const job = jobs.find(job => job.id === id)
-    return job
+  static async getById(id) {
+    return jobs.find(job => job.id === id)
   }
 
   static async create({titulo, empresa, ubicacion, data, ...props}){

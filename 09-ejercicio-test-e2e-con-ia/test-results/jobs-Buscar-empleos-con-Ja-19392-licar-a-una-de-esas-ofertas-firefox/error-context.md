@@ -1,0 +1,45 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "DevJobs" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - heading "DevJobs" [level=1] [ref=e5]:
+        - img [ref=e6]
+        - text: DevJobs
+    - navigation [ref=e9]:
+      - link "Inicio" [ref=e10] [cursor=pointer]:
+        - /url: /
+      - link "Empleos" [ref=e11] [cursor=pointer]:
+        - /url: /search
+    - button "Iniciar Sesión" [ref=e12] [cursor=pointer]
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - img [ref=e15]
+      - heading "Encuentra el trabajo de tus sueños" [level=1] [ref=e16]
+      - paragraph [ref=e17]: Únete a la comunidad más grande de desarrolladores y encuentra tu próxima oportunidad.
+      - search [ref=e18]:
+        - generic [ref=e19]:
+          - img [ref=e20]
+          - searchbox "Buscar empleos" [ref=e24]: Javascript
+          - button "Buscar" [active] [ref=e25] [cursor=pointer]
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - heading "¿Por qué DevJobs?" [level=2] [ref=e28]
+        - paragraph [ref=e29]: DevJobs es la principal plataforma de búsqueda de empleo para desarrolladores. Conectamos a los mejores talentos con las empresas más innovadoras.
+      - generic [ref=e30]:
+        - article [ref=e31]:
+          - img [ref=e32]
+          - heading "Encuentra el trabajo de tus sueños" [level=3] [ref=e34]
+          - paragraph [ref=e35]: Busca miles de empleos de las mejores empresas de todo el mundo.
+        - article [ref=e36]:
+          - img [ref=e37]
+          - heading "Conecta con las mejores empresas" [level=3] [ref=e39]
+          - paragraph [ref=e40]: Conecta con empresas que están contratando por tus habilidades.
+        - article [ref=e41]:
+          - img [ref=e42]
+          - heading "Obtén el salario que mereces" [level=3] [ref=e44]
+          - paragraph [ref=e45]: Obtén el salario que mereces con nuestra calculadora de salarios.
+  - contentinfo [ref=e46]: © 2025 DevJobs. Todos los derechos reservados.
+```

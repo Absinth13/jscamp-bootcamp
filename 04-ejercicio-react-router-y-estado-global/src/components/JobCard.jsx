@@ -41,9 +41,10 @@ export function JobCard({ job }) {
   return (
     <article
       className="job-listing-card"
-      data-modalidad={job.modalidad}
-      data-nivel={job.nivel}
-      data-technology={job.technology}
+      data-modalidad={job.data?.modalidad}
+      data-nivel={job.data?.nivel}
+      data-technology={job.data?.technology}
+  
     >
       <div>
         <h3>

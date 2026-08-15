@@ -63,7 +63,11 @@ export function Pagination({ currentPage = 1, totalPages = 10, onPageChange }) {
           data-page={page}
           href={buildPageUrl(page)}
           className={currentPage === page ? styles.isActive : ''}
-          onClick={handleChangePage}
+          onClick={(e) => {
+            e.preventDefault()
+            onPageChange(page)
+            window.history.pushState({}, '', buildPageUrl(page))   
+          }}
         >
           {page}
         </a>
