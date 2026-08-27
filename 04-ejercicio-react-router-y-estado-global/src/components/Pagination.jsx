@@ -41,7 +41,8 @@ export function Pagination({ currentPage = 1, totalPages = 10, onPageChange }) {
 
   return (
     <nav className={styles.pagination} data-testid="pagination">
-      <a href={buildPageUrl(currentPage - 1)} style={stylePrevButton} onClick={handlePrevClick}>
+      {/* Agregamos aria-label al botón para que tenga nombre accesible y los tests lo encuentren por rol, que es lo recomendado en buenas prácticas */}
+      <a href={buildPageUrl(currentPage - 1)} aria-label="Anterior" style={stylePrevButton} onClick={handlePrevClick}>
         <svg
           width="16"
           height="16"
@@ -73,7 +74,7 @@ export function Pagination({ currentPage = 1, totalPages = 10, onPageChange }) {
         </a>
       ))}
 
-      <a href={buildPageUrl(currentPage + 1)} style={styleNextButton} onClick={handleNextClick}>
+      <a href={buildPageUrl(currentPage + 1)} aria-label="Siguiente" style={styleNextButton} onClick={handleNextClick}>
         <svg
           width="16"
           height="16"
