@@ -53,9 +53,20 @@ function DetailPageHeader({ job }) {
 
 function DetailApplyButton(){
   const {isLoggedIn} = useAuthStore()
+  // guardamos si ya aplicamos al empleo, para poder cambiar el texto del botón. Esto es un requisito que se necesitaba para el ejercicio, y para el test
+  const [isApplied, setIsApplied] = useState(false)
+
+    // Antes el botón solo decía "Aplicar ahora" o "Inicia sesión para aplicar" y nunca cambiaba a "Aplicado" cuando hacías clic
+    // Ahora el texto cambia a "Aplicado" después de aplicar
+    const buttonText = isApplied ? 'Aplicado' : isLoggedIn ? 'Aplicar' : 'Inicia sesión para aplicar'
     return (
-        <button disabled={!isLoggedIn} className={styles.applyButton}>
-          {isLoggedIn ? "Aplicar ahora" : "Inicia sesión para aplicar"}
+        <button
+          disabled={!isLoggedIn}
+          className={styles.applyButton}
+          // Al hacer clic marcamos que ya aplicamos
+          onClick={() => setIsApplied(true)}
+        >
+          {buttonText}
         </button>
       )
 }
