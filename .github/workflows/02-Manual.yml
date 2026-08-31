@@ -12,7 +12,7 @@ jobs:
      - name: Ver fecha del runner 
        run: date
      - name: Ver archivos disponibles
-       run: ls-la
+       run: ls -la
 
 
 
