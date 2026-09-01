@@ -29,6 +29,6 @@ runs:
   
     - name: Install dependecies
       shell: bash
-      working-directory: ${{ github.workspace }}/12-ejercicio-cicd
+      working-directory: 12-ejercicio-cicd
       run: pnpm install --frozen-lockfile
       
