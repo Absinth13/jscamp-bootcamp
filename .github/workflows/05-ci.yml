@@ -13,53 +13,47 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
-      
-      - name: Preparar pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          version: 11
-          run_install: false
-      
-      - name: Install dependecies
-       
-        run: | 
-          cd 12-ejercicio-cicd/projects/frontend
-          echo "::group::Instalar dependecias"
-          pnpm install --frozen-lockfile
+
+      - name: Setup pnpm and Node.js
+        uses: ./.github/actions/setup-pnpm-ci-cd
          
       - name: Lint
         run: | 
           cd 12-ejercicio-cicd/projects/frontend
           echo "::group::Lint"
-          pnpm lint
+          pnpm lint:frontend
           echo "::endgroup::"
+         
           
           
   frontend-test:
     runs-on: ubuntu-24.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-      
-      - name: Preparar pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          version: 11
-          run_install: false
-      
-      - name: Install dependecies
-       
-        run: | 
-          cd 12-ejercicio-cicd/projects/frontend
-          echo "::group::Instalar dependecias"
-          pnpm install --frozen-lockfile
-         
-      - name: Test
-        run: | 
+     - name: Checkout code
+       uses: actions/checkout@v6
+
+     - name: Setup pnpm and Node.js
+       uses: ./.github/actions/setup-pnpm-ci-cd
+    
+     - name: Test
+       run: | 
           cd 12-ejercicio-cicd/projects/frontend
           echo "::group::Test"
-          pnpm test
+          pnpm test:frontend
           echo "::endgroup::"
+
+  frontend-build:
+      needs: [frontend-lint, frontend-test]
+      runs-on: ubuntu-24.04
+      steps:
+        - uses: actions/checkout@v6
+        - uses: ./.github/actions/setup-pnpm-ci-cd
+        - name: Build
+          run: 
+            cd 12-ejercicio-cicd/projects/frontend
+            echo "::group::Build"
+            pnpm build:frontend
+            echo "::endgroup::"
 
      
   backend-lint: 
@@ -67,47 +61,62 @@ jobs:
      steps:
        - name: Checkout code
          uses: actions/checkout@v6
-      
-       - name: Preparar pnpm
-         uses: pnpm/action-setup@v6
-         with:
-           version: 11
-           run_install: false
-      
-       - name: Instalar dependencias
-         run: | 
-           cd 12-ejercicio-cicd/projects/backend
-           echo "::group::Instalar dependencias"
-           pnpm install --frozen-lockfile
-        
+
+       - name: Setup pnpm and Node.js
+         uses: ./.github/actions/setup-pnpm-ci-cd
+
        - name: Lint
          run: |
-            cd 12-ejercicio-cicd/projects/backend
-            echo "::group::Lint"  
-            pnpm run lint  
-            echo "::endgroup::" 
-            
+           cd 12-ejercicio-cicd/projects/backend
+           echo "::group::Lint"
+           pnpm lint:backend
+           echo "::endgroup::" 
+
   backend-test:
      runs-on: ubuntu-24.04
      steps:
        - name: Checkout code
          uses: actions/checkout@v6
-      
-       - name: Preparar pnpm
-         uses: pnpm/action-setup@v6
+
+       - name: Setup pnpm and Node.js
+         uses: ./.github/actions/setup-pnpm-ci-cd
          with:
-           version: 11
-           run_install: false
+           node-version: 24
+           pnpm-version: 11
       
-       - name: Instalar dependencias
-         run: | 
-           cd 12-ejercicio-cicd/projects/backend
-           echo "::group::Instalar dependencias"
-           pnpm install --frozen-lockfile
-        
        - name: Test
          run: |
-            cd 12-ejercicio-cicd/projects/backend
-            echo "::group::Test"  
-            pnpm run test  
-            echo "::endgroup::" 
+           cd 12-ejercicio-cicd/projects/backend
+           echo "::group::Test"
+           pnpm test:backend
+           echo "::endgroup::"
+         
+      
+  
+  
+  backend-build:
+        needs: [frontend-lint, frontend-test]
+        runs-on: ubuntu-24.04
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v6
+          
+          - name: preparar pnpm
+            uses: pnpm/action-setup@v6
+            with:
+              version: 11
+              run_install: false
+
+          - name: Instalar dependencias
+            run: | 
+              cd 12-ejercicio-cicd/projects/backend
+              echo "::group::Instalar dependencias"
+              pnpm install --frozen-lockfile
+              
+          - name: Build backend
+            run:
+             cd 12-ejercicio-cicd/projects/backend
+             echo "::group::Build backend"
+             pnpm run build
+             echo "::endgroup::"   
+
