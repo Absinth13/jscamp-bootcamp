@@ -15,19 +15,20 @@ inputs:
 runs:
   using: 'composite'
   steps:   
-    - name: Setup Node.js
-      uses: actions/setup-node@v6
-      with:
-        node-version: ${{ inputs.node-version }}
-
+    # El step de pnpm debe ir antes del de  Node para que setup-node lo detecte
     - name: Setup pnpm
       uses: pnpm/action-setup@v6
       with:
         version: ${{ inputs.pnpm-version }}
         run_install: false
 
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{ inputs.node-version }}
+
   
-    - name: Install dependecies
+    - name: Install dependencies
       shell: bash
       run: | 
        cd 12-ejercicio-cicd
