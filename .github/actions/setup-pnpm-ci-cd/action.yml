@@ -30,6 +30,6 @@ runs:
     - name: Install dependecies
       shell: bash
       run: |
-       cd 12-ejercicio-cicd
+       cd $GITHUB_WORKSPACE/12-ejercicio-cicd
        pnpm install --frozen-lockfile
       
