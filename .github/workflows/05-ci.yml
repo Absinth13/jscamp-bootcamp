@@ -42,7 +42,7 @@ jobs:
         - uses: actions/checkout@v6
         - uses: ./.github/actions/setup-pnpm-ci-cd
         - name: Build
-          run: 
+          run: |
             cd 12-ejercicio-cicd
             echo "::group::Build"
             pnpm build:frontend
@@ -81,7 +81,7 @@ jobs:
           - uses: actions/checkout@v6
           - uses: ./.github/actions/setup-pnpm-ci-cd
           - name: Build
-            run: 
+            run: |
               cd 12-ejercicio-cicd
               echo "::group::Build"
               pnpm build:backend
