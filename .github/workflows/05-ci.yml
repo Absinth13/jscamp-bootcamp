@@ -91,10 +91,10 @@ jobs:
      runs-on: ubuntu-24.04
      steps:
        - name: Checkout code
-         uses: actions/checkout@v6
+         uses: pnpm/action-setup@v6
       
        - name: Preparar pnpm
-         uses: pnpm/actions-setup@v6
+         uses: pnpm/action-setup@v6
          with:
            version: 11
            run_install: false
