@@ -58,7 +58,7 @@ jobs:
         run: | 
           cd 12-ejercicio-cicd/projects/frontend
           echo "::group::Test"
-          pnpm test:frontend
+          pnpm test
           echo "::endgroup::"
 
      
