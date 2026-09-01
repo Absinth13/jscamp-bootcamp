@@ -11,15 +11,12 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Setup pnpm and Node.js
-        uses: ./.github/actions/setup-pnpm-ci-cd
-         
+     
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup-pnpm-ci-cd
       - name: Lint
         run: | 
-          
+          cd 12-ejercicio-cicd
           echo "::group::Lint"
           pnpm lint:frontend
           echo "::endgroup::"
@@ -29,15 +26,11 @@ jobs:
   frontend-test:
     runs-on: ubuntu-24.04
     steps:
-     - name: Checkout code
-       uses: actions/checkout@v6
-
-     - name: Setup pnpm and Node.js
-       uses: ./.github/actions/setup-pnpm-ci-cd
-    
+     - uses: actions/checkout@v6
+     - uses: ./.github/actions/setup-pnpm-ci-cd
      - name: Test
        run: | 
-          
+          cd 12-ejercicio-cicd
           echo "::group::Test"
           pnpm test:frontend
           echo "::endgroup::"
@@ -50,7 +43,7 @@ jobs:
         - uses: ./.github/actions/setup-pnpm-ci-cd
         - name: Build
           run: 
-            
+            cd 12-ejercicio-cicd
             echo "::group::Build"
             pnpm build:frontend
             echo "::endgroup::"
@@ -59,15 +52,11 @@ jobs:
   backend-lint: 
      runs-on: ubuntu-24.04
      steps:
-       - name: Checkout code
-         uses: actions/checkout@v6
-
-       - name: Setup pnpm and Node.js
-         uses: ./.github/actions/setup-pnpm-ci-cd
-
+       - uses: actions/checkout@v6
+       - uses: ./.github/actions/setup-pnpm-ci-cd
        - name: Lint
          run: |
-          
+           cd 12-ejercicio-cicd
            echo "::group::Lint"
            pnpm lint:backend
            echo "::endgroup::" 
@@ -75,48 +64,26 @@ jobs:
   backend-test:
      runs-on: ubuntu-24.04
      steps:
-       - name: Checkout code
-         uses: actions/checkout@v6
-
-       - name: Setup pnpm and Node.js
-         uses: ./.github/actions/setup-pnpm-ci-cd
-         with:
-           node-version: 24
-           pnpm-version: 11
-      
+       - uses: actions/checkout@v6
+       - uses: ./.github/actions/setup-pnpm-ci-cd
        - name: Test
          run: |
-          
+           cd 12-ejercicio-cicd
            echo "::group::Test"
            pnpm test:backend
            echo "::endgroup::"
          
       
-  
-  
   backend-build:
-        needs: [frontend-lint, frontend-test]
-        runs-on: ubuntu-24.04
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v6
-          
-          - name: preparar pnpm
-            uses: pnpm/action-setup@v6
-            with:
-              version: 11
-              run_install: false
-
-          - name: Instalar dependencias
-            run: | 
-              
-              echo "::group::Instalar dependencias"
-              pnpm install --frozen-lockfile
-
-          - name: Build backend
-            run:
-             
-             echo "::group::Build backend"
-             pnpm run build
-             echo "::endgroup::"   
+      needs: [backend-lint, backend-test]
+      runs-on: ubuntu-24.04
+      steps:
+          - uses: actions/checkout@v6
+          - uses: ./.github/actions/setup-pnpm-ci-cd
+          - name: Build
+            run: 
+              cd 12-ejercicio-cicd
+              echo "::group::Build"
+              pnpm build:backend
+              echo "::endgroup::"
 

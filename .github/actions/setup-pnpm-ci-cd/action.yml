@@ -29,6 +29,7 @@ runs:
   
     - name: Install dependecies
       shell: bash
-      working-directory: 12-ejercicio-cicd
-      run: pnpm install --frozen-lockfile
+      run: | 
+       cd 12-ejercicio-cicd
+       pnpm install --frozen-lockfile
       
