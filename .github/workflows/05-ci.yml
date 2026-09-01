@@ -7,7 +7,7 @@ on:
         branches: [main]
 
 jobs: 
-  ci: 
+  frontend-lint: 
     runs-on: ubuntu-24.04
 
     steps:
@@ -21,31 +21,93 @@ jobs:
           run_install: false
       
       - name: Install dependecies
+       
         run: | 
           cd 12-ejercicio-cicd
           echo "::group::Instalar dependecias"
           pnpm install --frozen-lockfile
-          echo "::endgroup::"
-
+         
       - name: Lint
         run: | 
           cd 12-ejercicio-cicd
           echo "::group::Lint"
-          pnpm run lint
+          pnpm lint:frontend
           echo "::endgroup::"
-
+          
+          
+  frontend-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      
+      - name: Preparar pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11
+          run_install: false
+      
+      - name: Install dependecies
+       
+        run: | 
+          cd 12-ejercicio-cicd
+          echo "::group::Instalar dependecias"
+          pnpm install --frozen-lockfile
+         
       - name: Test
         run: | 
           cd 12-ejercicio-cicd
           echo "::group::Test"
-          pnpm run test
+          pnpm test:frontend
           echo "::endgroup::"
 
-      - name: Build 
-        run: | 
-          cd 12-ejercicio-cicd
-          echo "::group::Build"
-          pnpm run build
-          echo "::endgroup::"
-
+     
+  backend-lint: 
+     runs-on: ubuntu-24.04
+     steps:
+       - name: Checkout code
+         uses: actions/checkout@v6
       
+       - name: Preparar pnpm
+         uses: pnpm/actions-setup@v6
+         with:
+           version: 11
+           run_install: false
+      
+       - name: Instalar dependencias
+         run: | 
+           cd 12-ejercicio-cicd/backend
+           echo "::group::Instalar dependencias"
+           pnpm install --frozen-lockfile
+        
+       - name: Lint
+         run: |
+            cd 12-ejercicio-cicd/backend
+            echo "::group::Lint"  
+            pnpm run lint  
+            echo "::endgroup::" 
+            
+  backend-test:
+     runs-on: ubuntu-24.04
+     steps:
+       - name: Checkout code
+         uses: actions/checkout@v6
+      
+       - name: Preparar pnpm
+         uses: pnpm/actions-setup@v6
+         with:
+           version: 11
+           run_install: false
+      
+       - name: Instalar dependencias
+         run: | 
+           cd 12-ejercicio-cicd/backend
+           echo "::group::Instalar dependencias"
+           pnpm install --frozen-lockfile
+        
+       - name: Test
+         run: |
+            cd 12-ejercicio-cicd/backend
+            echo "::group::Test"  
+            pnpm run test  
+            echo "::endgroup::" 
