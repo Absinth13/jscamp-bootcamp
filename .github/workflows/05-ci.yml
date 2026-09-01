@@ -19,7 +19,7 @@ jobs:
          
       - name: Lint
         run: | 
-          cd 12-ejercicio-cicd/projects/frontend
+          
           echo "::group::Lint"
           pnpm lint:frontend
           echo "::endgroup::"
@@ -37,7 +37,7 @@ jobs:
     
      - name: Test
        run: | 
-          cd 12-ejercicio-cicd/projects/frontend
+          
           echo "::group::Test"
           pnpm test:frontend
           echo "::endgroup::"
@@ -50,7 +50,7 @@ jobs:
         - uses: ./.github/actions/setup-pnpm-ci-cd
         - name: Build
           run: 
-            cd 12-ejercicio-cicd/projects/frontend
+            
             echo "::group::Build"
             pnpm build:frontend
             echo "::endgroup::"
@@ -67,7 +67,7 @@ jobs:
 
        - name: Lint
          run: |
-           cd 12-ejercicio-cicd/projects/backend
+          
            echo "::group::Lint"
            pnpm lint:backend
            echo "::endgroup::" 
@@ -86,7 +86,7 @@ jobs:
       
        - name: Test
          run: |
-           cd 12-ejercicio-cicd/projects/backend
+          
            echo "::group::Test"
            pnpm test:backend
            echo "::endgroup::"
@@ -109,13 +109,13 @@ jobs:
 
           - name: Instalar dependencias
             run: | 
-              cd 12-ejercicio-cicd/projects/backend
+              
               echo "::group::Instalar dependencias"
               pnpm install --frozen-lockfile
-              
+
           - name: Build backend
             run:
-             cd 12-ejercicio-cicd/projects/backend
+             
              echo "::group::Build backend"
              pnpm run build
              echo "::endgroup::"   
