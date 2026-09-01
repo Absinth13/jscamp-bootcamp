@@ -23,13 +23,13 @@ jobs:
       - name: Install dependecies
        
         run: | 
-          cd 12-ejercicio-cicd
+          cd 12-ejercicio-cicd/projects/frontend
           echo "::group::Instalar dependecias"
           pnpm install --frozen-lockfile
          
       - name: Lint
         run: | 
-          cd 12-ejercicio-cicd
+          cd 12-ejercicio-cicd/projects/frontend
           echo "::group::Lint"
           pnpm lint:frontend
           echo "::endgroup::"
@@ -50,13 +50,13 @@ jobs:
       - name: Install dependecies
        
         run: | 
-          cd 12-ejercicio-cicd
+          cd 12-ejercicio-cicd/projects/frontend
           echo "::group::Instalar dependecias"
           pnpm install --frozen-lockfile
          
       - name: Test
         run: | 
-          cd 12-ejercicio-cicd
+          cd 12-ejercicio-cicd/projects/frontend
           echo "::group::Test"
           pnpm test:frontend
           echo "::endgroup::"
@@ -76,13 +76,13 @@ jobs:
       
        - name: Instalar dependencias
          run: | 
-           cd 12-ejercicio-cicd/backend
+           cd 12-ejercicio-cicd/projects/backend
            echo "::group::Instalar dependencias"
            pnpm install --frozen-lockfile
         
        - name: Lint
          run: |
-            cd 12-ejercicio-cicd/backend
+            cd 12-ejercicio-cicd/projects/backend
             echo "::group::Lint"  
             pnpm run lint  
             echo "::endgroup::" 
@@ -101,13 +101,13 @@ jobs:
       
        - name: Instalar dependencias
          run: | 
-           cd 12-ejercicio-cicd/backend
+           cd 12-ejercicio-cicd/projects/backend
            echo "::group::Instalar dependencias"
            pnpm install --frozen-lockfile
         
        - name: Test
          run: |
-            cd 12-ejercicio-cicd/backend
+            cd 12-ejercicio-cicd/projects/backend
             echo "::group::Test"  
             pnpm run test  
             echo "::endgroup::" 
