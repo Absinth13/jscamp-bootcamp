@@ -2,6 +2,8 @@ name: 04- Events
 
 on: 
     issues:
+        # El ejercicio pedía `assigned` no `reopened` pero lo dejamos mencionado, lo que hiciste está perfecto :) Lo comentamos solo para dejarlo documentado
+        # types: [opened, assigned]
         types: [opened, reopened]
     issue_comment: 
         types: [created]

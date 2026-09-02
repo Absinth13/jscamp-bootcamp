@@ -1,1 +1,2 @@
 <!-- Aquí irá tu feedback -->
+Muy buen trabajo! Hicimos algunos cambios mínimos, algunos por errores de typo y otros (en `05-ci.yml`) para enseñarte una utilidad que, en este caso, es muy útil y facilita el no repetir código dentro de los steps.
