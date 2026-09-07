@@ -6,7 +6,8 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Es mejor copiar solo el código de la app, asi evitamos incluir archivos innecesarios en la imagen
+COPY app.py .
 
 EXPOSE 5000
 
